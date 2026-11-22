@@ -397,7 +397,7 @@ function stockChanged() {
   $('stock-empty').hidden = !!file
   if (file) {
     $('stock-name').textContent = file.name
-    $('stock-size').textContent = `Â· ${fileSizeText(file.size)}`
+    $('stock-size').textContent = `· ${fileSizeText(file.size)}`
   }
   refresh()
 }

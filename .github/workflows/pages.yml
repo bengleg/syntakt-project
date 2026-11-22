@@ -1,0 +1,68 @@
+# Builds the browser page and publishes it to GitHub Pages.
+# The engine is cloned from synfact-dev, pinned at commit fcbc288, into the runner's temp folder.
+# The stock OS file is never used or stored here; no secrets are needed.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - 'tools/sypatch/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch engine (synfact-dev at fcbc288)
+        run: |
+          set -euo pipefail
+          git clone https://github.com/GSM1980/synfact-dev "$RUNNER_TEMP/engine"
+          git -C "$RUNNER_TEMP/engine" checkout fcbc288
+
+      - name: Install esbuild 0.28.2
+        run: npm install --prefix "$RUNNER_TEMP/tools" esbuild@0.28.2
+
+      - name: Build web/dist
+        run: |
+          set -euo pipefail
+          ELEKLOADER_JS="$RUNNER_TEMP/engine/js/src" \
+          ESBUILD_JS="file://$RUNNER_TEMP/tools/node_modules/esbuild/lib/main.js" \
+          node web/build.mjs
+
+      - name: Stage site
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/dist
+          cp web/index.html web/app.mjs _site/
+          cp -r web/patches _site/patches
+          cp web/dist/worker.mjs web/dist/merge.mjs web/dist/analyze.mjs _site/dist/
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

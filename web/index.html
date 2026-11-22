@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Private browser tool that builds a patched Syntakt OS 1.41 file from your own OS file. Nothing is uploaded.">
-  <title>Syntakt OS 1.41 patch builder (private)</title>
+  <meta name="description" content="Builds a patched Syntakt OS 1.41 file from your own OS file, in your browser. Nothing is uploaded.">
+  <title>Syntakt OS 1.41 patch builder</title>
   <style>
     /* Geist dark palette (approximate values of the Geist scales; no external font or CDN requests) */
     :root {
@@ -292,7 +292,7 @@
 
   <main id="content">
     <h1>Syntakt OS 1.41 patch builder</h1>
-    <p class="lede">Private build. Your OS file stays in this browser tab: nothing is uploaded. Use only your own legally obtained OS 1.41 file.</p>
+    <p class="lede">Your OS file stays in this browser tab: nothing is uploaded. Use only your own legally obtained OS 1.41 file.</p>
 
     <details class="card" open>
       <summary>How this works</summary>
@@ -364,7 +364,7 @@
       <p class="muted" id="import-help">Add mod files you were sent (.json). You can pick several at once. Each file is checked here first.</p>
       <p class="muted">A patch file is one plain text file. It is only used when you tick it and press build. It cannot run anything here, and nothing is uploaded.</p>
       <p class="muted">Only add files from people you trust. This page cannot yet check that your unit will still start with them.</p>
-      <p class="muted">Writing your own mod needs programming (C language). This is only for developers; you can ignore it. The guide is <code>docs/SDK.md</code> in the repository.</p>
+      <p class="muted">Writing your own mod needs programming (C language). This is only for developers; you can ignore it. The guide is <a href="https://github.com/bengleg/syntakt-project/blob/main/docs/SDK.md"><code>docs/SDK.md</code></a> in the repository.</p>
     </section>
 
     <section id="os-file" aria-labelledby="os-title">
@@ -420,10 +420,11 @@
   </main>
 
   <footer class="foot">
-    <p>Private build for OS 1.41 only. Runs in this tab, nothing is uploaded.</p>
+    <p>For OS 1.41 only. Runs in this tab, nothing is uploaded.</p>
+    <p>Includes the engine from <a href="https://github.com/GSM1980/synfact-dev/tree/fcbc288">synfact-dev</a> (commit fcbc288), licensed GPL-3.0-or-later.</p>
   </footer>
 
   <script>window.addEventListener('error', e => { document.title = 'ERR ' + e.message })</script>
-  <script type="module">import('./app.mjs?v=10')</script>
+  <script type="module">import('./app.mjs?v=11')</script>
 </body>
 </html>
