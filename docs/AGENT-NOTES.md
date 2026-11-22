@@ -1,6 +1,6 @@
-> Project picture (when working in the Syntakt_Project checkout): ..\AGENTS.md, ..\STATE.md, ..\OPEN_DECISIONS.md.
+> Project picture (when working in the Syntakt_Project checkout): ..\PROJECT_STATUS.md, ..\AGENTS.md, ..\STATE.md, ..\OPEN_DECISIONS.md.
 
-# AGENTS.md
+# Agent notes: code-level rules (this is docs/AGENT-NOTES.md; the root briefing is ..\AGENTS.md)
 
 Guidance for AI agents working in this repository. Read it before you change
 anything. Humans: [CONTRIBUTING.md](CONTRIBUTING.md) and [LEGAL.md](LEGAL.md).

@@ -8,10 +8,11 @@ Public repository (decided 2026-11-22). Build from the stock OS file you downloa
 ## Read order
 
 1. This file.
-2. STATE.md.
-3. OPEN_DECISIONS.md.
-4. DISCOVERY_LOG.md.
-5. `docs/AGENT-NOTES.md` — code-level rules: verification commands, package rules, browser rules.
+2. `PROJECT_STATUS.md` — one-page status sheet: features, builds, what is public, open gaps.
+3. STATE.md.
+4. OPEN_DECISIONS.md.
+5. DISCOVERY_LOG.md.
+6. `docs/AGENT-NOTES.md` — code-level rules: verification commands, package rules, browser rules.
 
 HISTORY.md, SDK_AND_FX3_NOTES.md and `archive/` only on demand.
 
@@ -47,7 +48,7 @@ HISTORY.md, SDK_AND_FX3_NOTES.md and `archive/` only on demand.
 | Verified addresses | `DISCOVERY_LOG.md` | |
 | Build hashes | `FIRMWARE_INDEX.csv` | |
 | Old worktree history | `..\Default Project\Synthack-OS` | branches `private/*` |
-| User manual | `..\Default Project\Syntakt_DelayCtrl_Firmware_Manual.md` | |
+| User manual | `MANUAL.md` | Copy of the original; the original `..\Default Project\Syntakt_DelayCtrl_Firmware_Manual.md` is read-only |
 | Recovery doc | `RECOVERY.md` | |
 
 ## How work is done here
@@ -73,7 +74,4 @@ HISTORY.md, SDK_AND_FX3_NOTES.md and `archive/` only on demand.
 
 ## Status right now
 
-- Tested baseline: `delay_control_v2o.syx`, SHA-256 `3df95923db35b0787119b04253e877f62b7c10ee1b7ab3f87340673aa843e3ac`. The DCTL 9-step list is not yet confirmed on the unit.
-- Known-good fallback: `delay_control_v2l.syx`, SHA-256 `4b2a291ee872f827ba4b7644228c4bb9fb89720ed2ecbeb19a63a82c7fdd82e9`.
-- All-features build from round 6 is `25773b…` (first six hex, full value not recorded). Not verified in the emulator or on hardware.
-- Details: STATE.md. Open decisions: OPEN_DECISIONS.md.
+- Current builds, hashes, features and open gaps: `PROJECT_STATUS.md`. Working history: STATE.md. Open decisions: OPEN_DECISIONS.md.
