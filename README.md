@@ -10,7 +10,7 @@ a build starts from the stock OS file you downloaded from elektron.se, so no fir
 
 ## Install it on your Syntakt
 
-You can download a ready-built file from [Releases](https://github.com/bengleg/syntakt-project/releases), or build it yourself on a computer with the steps below. Both come from your own OS 1.41 file.
+You build the firmware file yourself on a computer. No ready-made file is offered here.
 
 What the buttons do is in [MANUAL.md](MANUAL.md).
 

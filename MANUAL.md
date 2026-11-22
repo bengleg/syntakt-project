@@ -5,9 +5,8 @@ affiliated with or supported by Elektron.
 
 ## Getting the firmware
 
-Download the ready-built file from [Releases](https://github.com/bengleg/syntakt-project/releases)
-and flash it, or build it yourself from your own stock OS file — see
-[Install it on your Syntakt](README.md#install-it-on-your-syntakt). It is the same firmware either way.
+Build it yourself from your own stock OS file — see
+[Install it on your Syntakt](README.md#install-it-on-your-syntakt).
 
 ## What it changes
 
@@ -111,8 +110,7 @@ the normal way also puts the machine back to stock whenever you want.
 Modified firmware can leave the unit unusable and can void the warranty. Use it
 at your own risk.
 
-Nothing Elektron ships is stored in the repository. Both the release file and a
-self-built file are made from your own official OS 1.41 file. The bootloader is
+Elektron's licence doesn't allow modifying their software, so don't pass firmware files around; they contain Elektron's code. Share this manual and build instructions instead, and have each person build from their own official OS 1.41 file. The bootloader is
 untouched, which is what makes recovery possible.
 
 This sits on top of the open-source SyntHack project (MIT) and its tools.

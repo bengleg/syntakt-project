@@ -62,5 +62,5 @@ repository's MIT licence.
 
 ## Firmware
 
-Elektron's OS is not committed to this repository in any form. Patch data carries only this project's bytes plus SHA-256
-hashes of the stock bytes each change expects. A ready-built file attached to a Release is made from the user's own stock OS file, never from a copy stored here.
+Elektron's OS is not included in any form. Patch data carries only this project's bytes plus SHA-256
+hashes of the stock bytes each change expects.
