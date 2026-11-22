@@ -16,9 +16,11 @@ const ready = [bundle, SYNTAKT_STOCK, SYNTAKT_V2O].every(p => p && existsSync(p)
 test('the page core builds DelayCtrl byte for byte as the tested v2o .syx', { skip: !ready && 'needs web/dist and local files' }, async () => {
   const { buildPatched } = await import(bundleUrl.href)
   const doc = JSON.parse(readFileSync(new URL('../web/patches/delay-control.sypatch.json', import.meta.url), 'utf8'))
-  const syx = await buildPatched(doc, readFileSync(SYNTAKT_STOCK))
+  const { syx, margin, marginMin } = await buildPatched(doc, readFileSync(SYNTAKT_STOCK))
   const sha = b => createHash('sha256').update(b).digest('hex')
   assert.equal(sha(syx), sha(readFileSync(SYNTAKT_V2O)))
+  assert.ok(Number.isFinite(margin) && Number.isFinite(marginMin))
+  assert.ok(margin >= marginMin)
 })
 
 test('the page core refuses a file that is not the stock OS 1.41', { skip: !ready && 'needs web/dist and local files' }, async () => {

@@ -4,18 +4,19 @@ import { validatePackage, resolvePackages, mergePackages } from '../../tools/syp
 import { toSites, toArea } from '../../tools/sypatch/convert.mjs'
 import * as engine from './engine.generated.mjs'
 
+// Returns the .syx bytes, and the boot room left (margin) and the least it must be (marginMin), in bytes.
 export async function buildPatched(doc, stock) {
-  const { syx } = await buildSyxWith(doc, stock, engine)
-  return syx.slice()
+  const { syx, margin, marginMin } = await buildSyxWith(doc, stock, engine)
+  return { syx: syx.slice(), margin, marginMin }
 }
 
 // The packages (an object: id -> parsed .sypatch, in manifest order) resolved with their requirements, merged into one
-// document and built. Returns the .syx bytes and the package ids used, in order.
+// document and built. Returns the .syx bytes, the package ids used, in order, and the boot room figures.
 export async function buildPatchedFromPackages(packagesById, selectedIds, stock) {
   const ids = resolvePackages(packagesById, selectedIds)
   const doc = mergePackages(packagesById, ids)
-  const { syx } = await buildSyxWith(doc, stock, engine)
-  return { syx: syx.slice(), ids }
+  const { syx, margin, marginMin } = await buildSyxWith(doc, stock, engine)
+  return { syx: syx.slice(), ids, margin, marginMin }
 }
 
 // Checks a package from a file the user added, with the same refusals the build makes, before any stock file is read.

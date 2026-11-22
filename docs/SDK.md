@@ -233,10 +233,11 @@ The page checks:
 
 Then it builds the file in memory.
 
-The page does **not** check that your unit will still start. It does **not**
-check what your code does. So every file you add is "trusted only": you are
-trusting its author. The only check for the start-up margin is
-`tools/build/bootcheck.py`, which runs on a built file, not in the page.
+The page does check the start-up margin. It replays the unpacking the same way
+`tools/build/bootcheck.py` does, and it refuses a file below 4 KB. It does **not**
+replay your code, so it cannot say your unit will start. It also does **not**
+check what your code does. So every file you add is "trusted only" for what the
+code does: you are trusting its author.
 
 ## Test before flashing
 

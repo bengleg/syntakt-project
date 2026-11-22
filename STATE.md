@@ -1,6 +1,6 @@
 # State
 
-Last updated: 2026-11-21
+Last updated: 2026-11-23
 
 ## Builds
 
@@ -59,6 +59,15 @@ Full record: `SDK_AND_FX3_NOTES.md`. Read that first for anything about third-pa
 - Not tested: a real clash, a real compile with a define, any fx3-sized build, the emulator, hardware.
 - Found: fx3 and DelayCtrl hook the same spots (`0x4008F828`, `0x4008FB04`). Storage layouts differ and may overlap in the file; not yet compared.
 
+## Boot-margin check in the browser (2026-11-23)
+
+- New: `tools/sypatch/bootmargin.mjs` (the check), with `depackMargin` in `tools/sypatch/aplib.mjs`.
+- Wired through `tools/sypatch/bridge.mjs`, `web/src/core.mjs`, `web/src/worker.mjs`, `web/app.mjs` and `web/index.html`. The result line reads "Boot room: N bytes", and a file below 4096 is refused.
+- New test: `tests/sypatch_bootmargin.test.mjs` (synthetic; the real-file part skips without `SYNTAKT_STOCK` + `ELEKLOADER_JS`). `tests/web_core.test.mjs` now also asserts that the build reports a margin.
+- Page cache stamp is `v=10`.
+- Evidence: the JS port and `tools/build/bootcheck.py` both give 99 938 B on stock 1.41 (decoded section 3 = 3 438 480 B). The page core's DelayCtrl build still reproduces the tested v2o `.syx` byte for byte, with a boot room of 19 743 B.
+- Uncommitted in the working tree.
+
 ## Test status
 
 - Last recorded: `tests\test_delay_control.py` 41 passed, 3 skipped (2026-11-03). Re-run before relying on it.
@@ -68,10 +77,10 @@ Full record: `SDK_AND_FX3_NOTES.md`. Read that first for anything about third-pa
 
 ## Not done
 
-- The boot-margin check `tools\build\bootcheck.py` exists in Python only. The browser path has no equivalent, so user-added patch files stay trusted-files-only.
+- A build that adds code past the stock image end (a section-3 append) is still not built by the page. Only the page's own build path is covered by the margin check.
 - Nothing is verified for the split-feature builds. Each feature alone and all four together still need an emulator run.
 - The SYN page-number probe has not been run, so the two parked SYN graphics items are still open.
-- Nothing has been flashed, published, pushed or uploaded. Release path and packaging are undecided (see OPEN_DECISIONS.md items 4 and 5).
+- Nothing has been flashed, published, pushed or uploaded. Release path and packaging are undecided (see OPEN_DECISIONS.md items 4 and 5). This includes the boot-margin change of 2026-11-23.
 
 ## Website polish (2026-11-18)
 Builder page redesigned (steps bar, select all/none, drop zones, remove mod, copy SHA, flash note). Cache stamp ?v=8. Uncommitted in builder-web. Evidence and gaps in QUESTS.md.

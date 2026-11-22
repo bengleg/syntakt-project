@@ -49,7 +49,7 @@ Open `http://localhost:8000/`.
 
 `index.html` loads `app.mjs?v=<stamp>` and the stamp is carried onto the bundle and the worker.
 **Bump it after any change under `web/`**, or a cached copy can run against a fresh page. Current
-value: `v=9`.
+value: `v=10`.
 
 ## Tests
 
@@ -57,6 +57,7 @@ value: `v=9`.
 python -m pytest tests/test_sypatch.py -q
 node --test tests/sypatch_analyze.test.mjs tests/sypatch_packages.test.mjs
 node --test --test-skip-pattern rebuilt tests/engine_bridge.test.mjs   # synthetic only
+node --test tests/sypatch_bootmargin.test.mjs
 ```
 
 The tests that build a real image need `SYNTAKT_STOCK` and `ELEKLOADER_JS`; they are described in

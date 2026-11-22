@@ -6,6 +6,7 @@
 import { toSites, toArea, areaImage } from './convert.mjs'
 import { compress as shlz } from './lz.mjs'
 import { pack } from './aplib.mjs'
+import { checkBootMargin, MIN_MARGIN } from './bootmargin.mjs'
 import { toHex, fromHex } from './hex.mjs'
 
 const padTo4 = b => (b.length % 4 ? Uint8Array.from([...b, ...new Uint8Array(4 - (b.length % 4))]) : b)
@@ -56,7 +57,10 @@ export async function buildSyxWith(doc, callerStock, engine, { rebuild = true } 
   const image = formats.mainImage(stock, dev)
   const out = elemod.apply([mod], image)
   if (!rebuild) return { syx: null, image: out, sites: mod.sites }
-  const outputs = formats.write(stock, padTo4(pack(out, 3)), dev, null)
+  // Measured on the very bytes handed to write(), so the figure describes the file, not a copy of it.
+  const section = padTo4(pack(out, 3))
+  const { margin } = checkBootMargin(section)
+  const outputs = formats.write(stock, section, dev, null)
   formats.verify(outputs, stock, out, dev, null)
-  return { syx: outputs.syx, image: out, sites: mod.sites }
+  return { syx: outputs.syx, image: out, sites: mod.sites, margin, marginMin: MIN_MARGIN }
 }

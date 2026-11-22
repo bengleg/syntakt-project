@@ -229,3 +229,59 @@ export function depack(src) {
   }
   return Uint8Array.from(out)
 }
+
+const BOOT_BASE = 0x40200000 - 0x40000400
+const BOOT_END = {}
+
+/** section bytes -> { size, margin }: decoded size and the smallest gap (bytes) between the unread stream and the last written byte during start-up unpacking. A stream that runs out ends quietly. */
+export function depackMargin(src) {
+  let ip = SECT_HDR, op = 0, tag = 0, lastOff = 1
+  let worst = 2 ** 40
+  const bit = () => {
+    tag = (tag << 1) & 0xffff
+    if ((tag & 0xff) === 0) {
+      if (ip >= src.length) throw BOOT_END
+      const by = src[ip++]
+      tag = (by << 1) | 1
+      return by >> 7
+    }
+    return (tag >> 8) & 1
+  }
+  const gamma = () => {
+    let v = 1
+    for (;;) {
+      v = (v << 1) + bit()
+      if (bit()) return v
+    }
+  }
+  try {
+    while (ip < src.length) {
+      if (bit()) {
+        ip++
+        op++
+      } else {
+        const g = gamma()
+        let off
+        if (g === REUSE_GAMMA) {
+          off = lastOff
+        } else {
+          if (ip >= src.length) throw BOOT_END
+          off = (g << 8) + src[ip++]
+          if (off === OFFSET_BIAS) break
+          off -= OFFSET_BIAS
+          lastOff = off
+        }
+        let L = 2 * bit()
+        L += bit()
+        if (!L) L = gamma() + 2
+        if (off > FAR_THRESHOLD) L += 1
+        op += L + 1
+      }
+      const m = BOOT_BASE + ip - op
+      if (m < worst) worst = m
+    }
+  } catch (e) {
+    if (e !== BOOT_END) throw e
+  }
+  return { size: op, margin: worst }
+}

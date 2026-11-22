@@ -189,6 +189,9 @@
     #match.ok { color: var(--ds-green-700); }
     #match.warn { color: var(--ds-amber-700); }
     #match:empty { display: none; }
+    #boot-room.ok { color: var(--ds-green-700); }
+    #boot-room.warn { color: var(--ds-amber-700); }
+    #boot-room:empty { display: none; }
     .checks { display: grid; gap: .5rem; margin-bottom: .75rem; }
     .checks:empty { display: none; }
     ol#plan { margin: 0 0 .5rem; padding-left: 1.25rem; }
@@ -393,6 +396,7 @@
       <h2 id="result-title">Result <span class="badge" data-tone="ok">Built</span></h2>
       <p class="muted" id="applied"></p>
       <p class="muted" id="match"></p>
+      <p class="muted" id="boot-room"></p>
       <div class="row">
         <a id="download" class="download" href="#" download>Download .syx</a>
       </div>
@@ -420,6 +424,6 @@
   </footer>
 
   <script>window.addEventListener('error', e => { document.title = 'ERR ' + e.message })</script>
-  <script type="module">import('./app.mjs?v=9')</script>
+  <script type="module">import('./app.mjs?v=10')</script>
 </body>
 </html>

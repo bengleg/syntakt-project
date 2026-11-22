@@ -57,7 +57,7 @@ HISTORY.md, SDK_AND_FX3_NOTES.md and `archive/` only on demand.
 - Run emulator tests before asking benleg to flash.
 - Explicit gates stay: flashing, publishing and uploading need approval.
 - Keep builder changes and package changes in separate commits.
-- User-supplied patch files are trusted-files-only until the boot-margin check exists in the browser path.
+- The browser now measures the start-up (boot-room) margin of the file it builds and refuses below 4 KB, using `tools/sypatch/bootmargin.mjs`. It matches `tools/build/bootcheck.py`: both give 99 938 B on stock 1.41.
 
 ## Known traps
 

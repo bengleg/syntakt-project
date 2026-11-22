@@ -455,6 +455,10 @@ function showResult(data) {
     $('match').className = 'warn'
     $('match').textContent = 'This is not the single-file v2o build, so it is not expected to match the tested v2o build byte for byte.'
   }
+  const room = $('boot-room')
+  const hasRoom = Number.isFinite(data.margin) && Number.isFinite(data.marginMin)
+  room.className = hasRoom ? (data.margin >= data.marginMin ? 'ok' : 'warn') : ''
+  room.textContent = hasRoom ? `Boot room: ${data.margin} bytes (at least ${data.marginMin} needed).` : ''
   $('download').href = url
   $('download').download = v2o ? `delay-control-${data.sha256.slice(0, 8)}.syx` : `syntakt-os141-${data.sha256.slice(0, 8)}.syx`
   $('result').hidden = false

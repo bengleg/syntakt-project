@@ -31,10 +31,13 @@ Run from the repository root. Check the env column before you run a command.
 |---|---|---|
 | `python -m pytest tests/test_sypatch.py -q` | nothing | structural tests on synthetic data |
 | `node --test --test-skip-pattern rebuilt tests/engine_bridge.test.mjs` | nothing | runs synthetic tests; skips the tests named "rebuilt", which build a full `.syx` in memory |
+| `node --test tests/sypatch_bootmargin.test.mjs` | nothing (the real-file part skips without `SYNTAKT_STOCK` + `ELEKLOADER_JS`) | start-up margin check in `tools/sypatch/bootmargin.mjs` |
 | `node --test tests/engine_bridge.test.mjs` | `SYNTAKT_STOCK`, `ELEKLOADER_JS`, `SYNTAKT_LEGACY_PATCH` (+ optional `SYNTAKT_V2O`) | builds a full image; run only when the user asks |
 | `node web/build.mjs` | `ELEKLOADER_JS` (+ optional `ESBUILD_JS`) | writes `web/dist/`, which is git-ignored |
 | `node --test tests/web_core.test.mjs` | `SYNTAKT_STOCK`, `SYNTAKT_V2O`, and a previous `node web/build.mjs` | skipped without the bundle and local files |
 | `python -m pytest tests/test_modsdk.py -q` | nothing | tests that need the WSL m68k toolchain skip without it; the SDK in `tools/modsdk` |
+
+Trap: `python -m pytest tests/test_bootcheck.py -q` does not skip without its files. It fails. It needs the stock file copied into the repo's `firmware/` folder and a working `elektron-firmware-tool` (set `EFT_BIN`, or run `bash tools/unpack/setup_eft.sh`).
 
 Variables, as read by the tests:
 

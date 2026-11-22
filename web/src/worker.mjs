@@ -15,11 +15,11 @@ self.onmessage = async ({ data }) => {
       return self.postMessage({ type: 'valid', id, title })
     }
     if (data.type === 'build-packages') {
-      const { syx, ids } = await build(() => buildPatchedFromPackages(data.packages, data.ids, new Uint8Array(data.stock)))
-      return self.postMessage({ type: 'done', syx: syx.buffer, sha256: sha(syx), ids }, [syx.buffer])
+      const { syx, ids, margin, marginMin } = await build(() => buildPatchedFromPackages(data.packages, data.ids, new Uint8Array(data.stock)))
+      return self.postMessage({ type: 'done', syx: syx.buffer, sha256: sha(syx), ids, margin, marginMin }, [syx.buffer])
     }
-    const syx = await build(() => buildPatched(data.doc, new Uint8Array(data.stock)))
-    self.postMessage({ type: 'done', syx: syx.buffer, sha256: sha(syx) }, [syx.buffer])
+    const { syx, margin, marginMin } = await build(() => buildPatched(data.doc, new Uint8Array(data.stock)))
+    self.postMessage({ type: 'done', syx: syx.buffer, sha256: sha(syx), margin, marginMin }, [syx.buffer])
   } catch (error) {
     self.postMessage({ type: 'error', text: error instanceof Error ? error.message : String(error) })
   }

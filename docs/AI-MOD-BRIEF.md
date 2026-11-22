@@ -412,7 +412,8 @@ test in this session and can paste its output.
 - It does not measure cost.
 - It does not replay the replaced instructions in a hook.
 - It does not test your code on the unit or in the emulator.
-- It does not check that the unit will still start. The start-up margin check
-  (`tools/build/bootcheck.py`) runs on a built file, outside the SDK.
+- It does not check that the unit will still start. The page does check the
+  start-up margin (`tools/sypatch/bootmargin.mjs`, the same check as
+  `tools/build/bootcheck.py`, refuses below 4 KB), but nothing replays your code.
 - It does not put your mod on the reviewed list. That needs the owner's review
   (see [SDK.md](SDK.md), "Getting your mod on the reviewed list").
