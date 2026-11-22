@@ -16,16 +16,18 @@ checkout. Both it and `web/dist/` stay out of git.
 
 ## The engine
 
-The engine is elekloader's TypeScript `js/src` tree, **GPL-2.0-or-later**. It is never vendored: you
-point at a local checkout, so clone one first:
+The engine is the TypeScript `js/src` tree of [synfact-dev](https://github.com/GSM1980/synfact-dev),
+pinned at commit `fcbc288`. Its `js/` code is **GPL-3.0-or-later** (`js/LICENSE` in that repository).
+This repository does not contain it: you point at a local checkout, so clone and pin one first:
 
 ```sh
-git clone --depth 1 https://github.com/elekloader/elekloader.git
+git clone https://github.com/GSM1980/synfact-dev
+git -C synfact-dev checkout fcbc288
 ```
 
 ```sh
 # PowerShell
-$env:ELEKLOADER_JS = "path/to/elekloader/js/src"
+$env:ELEKLOADER_JS = "path/to/synfact-dev/js/src"
 $env:ESBUILD_JS   = "file:///path/to/esbuild/lib/main.js"   # only if esbuild is not installed
 node web/build.mjs
 ```
@@ -45,11 +47,19 @@ python -m http.server 8000
 
 Open `http://localhost:8000/`.
 
+## Publishing
+
+The public page at `https://bengleg.github.io/syntakt-project/` is built and published by the GitHub
+Pages workflow, `.github/workflows/pages.yml`. On each push to `main` that changes `web/` or
+`tools/sypatch/`, CI clones synfact-dev at `fcbc288`, installs esbuild 0.28.2 in a temporary folder,
+runs `node web/build.mjs`, and deploys the result. The bundle is built in CI and published on the
+site; it is never committed to this repository. CI uses no secrets and never touches a stock OS file.
+
 ## Cache stamp
 
 `index.html` loads `app.mjs?v=<stamp>` and the stamp is carried onto the bundle and the worker.
 **Bump it after any change under `web/`**, or a cached copy can run against a fresh page. Current
-value: `v=10`.
+value: `v=11`.
 
 ## Tests
 

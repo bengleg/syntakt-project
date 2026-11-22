@@ -10,7 +10,13 @@ a build starts from the stock OS file you downloaded from elektron.se, so no fir
 
 ## Install it on your Syntakt
 
-You build the firmware file yourself on a computer. No ready-made file is offered here.
+You build the firmware file yourself. No ready-made file is offered here. There are two routes.
+
+**Easy route: the browser page.** Open <https://bengleg.github.io/syntakt-project/>. Pick the features,
+choose your own `Syntakt_OS1.41.syx`, press Build. Your file is patched inside the browser tab, nothing
+is uploaded, and you download the result. Read [RECOVERY.md](RECOVERY.md) before you flash it.
+
+**Build it yourself.** Use the steps below.
 
 What the buttons do is in [MANUAL.md](MANUAL.md).
 
@@ -52,8 +58,8 @@ Agent briefing: [AGENTS.md](AGENTS.md). Current state: [STATE.md](STATE.md). Ope
 - Python 3.9+ (`pytest` for the tests)
 - Node 20+ for the browser builder and the JS tests
 - WSL or Linux with `m68k-linux-gnu-gcc` for compiling mods; `bash` for `tools/unpack/setup_eft.sh`
-- The engine: a local checkout of elekloader's `js/src` (GPL-2.0, never vendored) — needed by the
-  browser build and by the full-image tests
+- The engine: a local checkout of synfact-dev's `js/src` at commit `fcbc288` (GPL-3.0-or-later, never
+  vendored) — needed by the browser build and by the full-image tests
 - Your own `Syntakt_OS1.41.syx`, kept in a local `firmware/` folder (git-ignored)
 
 The m68k/LLVM toolchain, SGDK and the firmware container tool live in `tools/` on disk but are

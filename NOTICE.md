@@ -39,13 +39,16 @@ DelayCtrl and dc-diag mods, the docs listed as new below, and the `.gitignore` a
 | Tool | Licence | How |
 |---|---|---|
 | [elektron-firmware-tool](https://github.com/mischa85/elektron-firmware-tool) | MIT | `tools/eft-src/` and `tools/eft-build/`, or `tools/elektron-firmware-tool.exe`; or cloned to `third_party/` by `setup_eft.sh`. All git-ignored |
-| [elekloader](https://github.com/elekloader/elekloader) `js/src` | GPL-2.0-or-later | local path via `ELEKLOADER_JS`; bundled into git-ignored `web/dist/` |
+| [synfact-dev](https://github.com/GSM1980/synfact-dev) `js/src`, pinned at commit `fcbc288` | GPL-3.0-or-later | local path via `ELEKLOADER_JS`; built into `web/dist/` (git-ignored here) and published on the site `https://bengleg.github.io/syntakt-project/` |
 | [Unicorn](https://github.com/unicorn-engine/unicorn) | GPL-2.0 | Python package, installed separately |
 | esbuild | MIT | npm package or local file via `ESBUILD_JS` |
 | m68k GNU toolchain | GPL-3.0 | system packages, under WSL/Linux |
 
-The GPL engine is never committed, so no GPL source obligation arises here; the bundle in `web/dist/`
-is derived from it and is likewise not committed.
+The GPL engine source is not committed to this repository, and neither is the bundle built from it
+(`web/dist/` is git-ignored). The bundle is published on the site `https://bengleg.github.io/syntakt-project/`
+by the Pages workflow, so the site carries GPL-3.0-or-later engine code. The source is linked in the table
+above at the pinned commit `fcbc288`. An earlier version of this note named elekloader, gave the licence as
+GPL-2.0-or-later, and said no GPL obligation arose; that was wrong about the licence and about publishing.
 
 ## Local toolchains kept out of git
 

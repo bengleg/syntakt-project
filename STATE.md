@@ -16,7 +16,7 @@ Last updated: 2026-11-23
 | builder-web | `private/webbuilder-r6` | a63ad93 | clean |
 | builder-r1 | `private/patch-format-r1` | a75a38c | clean |
 | Synthack-OS | `synfact-split` | 86cc1c8 | clean |
-| synfact-dev | `main` | fcbc288 | clean and level with origin |
+| synfact-dev | `main` | fcbc288 | Pinned engine commit (used by the builds and the Pages workflow). Local checkout is 55 commits behind `origin/main`; that does not change the pin. Its working tree has uncommitted changes (604 entries in `git status`, mostly line endings; one file has 2 added lines once line endings are ignored), so CI builds from a clean clone. |
 
 ## Round 6
 

@@ -7,4 +7,4 @@
 - **Patches contain only our bytes** (our compiled code, our constants) plus SHA-256 hashes of the original bytes they expect.
 - **Interoperability.** Analysis is limited to what our independently written mods need to run on the user's own device (EU Directive 2009/24/EC arts. 5–6; Italian L. 633/1941 arts. 64-ter/quater).
 - **Not for sale.** Neither the mods nor prebuilt `.syx` files.
-- Our code is **MIT**. Third-party tools (elektron-firmware-tool: MIT; Unicorn: GPL-2.0, installed separately) are used as external programs and are not included.
+- Our code is **MIT**. Third-party tools (elektron-firmware-tool: MIT; Unicorn: GPL-2.0, installed separately) are used as external programs and are not included. The published site bundle (`https://bengleg.github.io/syntakt-project/`) does contain GPL-3.0-or-later engine code from synfact-dev, whose source is at `https://github.com/GSM1980/synfact-dev` (pinned at commit `fcbc288`).

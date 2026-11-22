@@ -22,6 +22,7 @@
    - A: Reddit r/Elektron post plus GitHub source (Recommended).
    - B: pursue an Elekloader port, which needs a Syntakt device and core events in their SDK, plus maintainer acceptance.
    - C: both.
+   - Note (2026-11-23): a live browser page is a new distribution channel (GitHub Pages). The owner has not yet said which option it belongs to.
 
 6. **How others make mods.** ANSWERED 2026-11-18: our own small SDK (`tools/modsdk`). Rejected: reviewed list only, and Synfact as the SDK (it cannot carry our DJ filter, SYN page or rate boxes). Move to HISTORY.md at the next tidy.
 
