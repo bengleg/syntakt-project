@@ -34,7 +34,7 @@ Both hashes in the first two rows match `FIRMWARE_INDEX.csv`. The `.syx` files a
 | GitHub repo | Public: `bengleg/syntakt-project`, branch `main`. Checked with `gh` on 2026-11-23. |
 | Built firmware file | Not distributed. Owner decision (see commit `8ad5c56` and README). |
 | GitHub Release | None. Users build from their own stock file. |
-| Browser builder `web/` | Hosted on GitHub Pages at `https://bengleg.github.io/syntakt-project/`, deployed from `main` by `.github/workflows/pages.yml` (added 2026-11-23). Live check: **pending**, not yet run. Verified working end to end on 2026-11-23 in headless Chrome, from a local build (desktop browsers not tested). Known gap: a wrong `.syx` still shows Ready until Build is pressed, then it is refused. |
+| Browser builder `web/` | Hosted on GitHub Pages at `https://bengleg.github.io/syntakt-project/`, deployed from `main` by `.github/workflows/pages.yml` (added 2026-11-23). Live check 2026-11-23 (headless Chrome, live URL): the v2o box gives `3df959…` and a 2,475,424-byte download. Deploy run 45069258773 succeeded. Verified working end to end on 2026-11-23 in headless Chrome, from a local build (desktop browsers not tested). Known gap: a wrong `.syx` still shows Ready until Build is pressed, then it is refused. |
 | Browser build core | Verified end to end on 2026-11-23 (headless Chrome). The baseline box reproduced the v2o build byte for byte (`3df959…`); the four-feature build gave `25773b…`. Evidence in QUESTS.md (Q3/Q6 evidence). |
 | To open the page | Public page: nothing to install. Local build: needs a synfact-dev checkout at `fcbc288` and `node web/build.mjs` (see `docs/BUILDING.md`). |
 
