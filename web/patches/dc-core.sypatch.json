@@ -1,0 +1,449 @@
+{
+ "format": "synthack-patchset",
+ "schema": 1,
+ "id": "delay-control-core",
+ "title": "Freeze / DelayCtrl",
+ "encoding": "lowercase-hex",
+ "requires": [
+  "modarea",
+  "delay-control-runtime"
+ ],
+ "target": {
+  "device": "Syntakt",
+  "os": "1.41",
+  "stock_sha256": "8e2488f462c4a5656396a895f113bcd415e9900fa8709340dccf45d4cb9ed19e"
+ },
+ "area": {
+  "img": "0x40348000",
+  "ram": "0x46000000",
+  "size": "0x10000",
+  "compress": "shlz"
+ },
+ "units": [
+  {
+   "id": "delay-control-core",
+   "title": "Freeze / DelayCtrl",
+   "blocks": [
+    {
+     "id": "delay-control-core-4002EA92",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4002ea92",
+     "len": 8,
+     "kind": "code",
+     "stock_sha256": "658707c783d5eb4c3e3fcb65eef1fb4e7c52116dc6736696f40face28028f6b8",
+     "new": [
+      [
+       "hex",
+       "4ef9460048664e71"
+      ]
+     ],
+     "new_sha256": "7898b73bb9c5805c0ceceec9a645f06c10a2c9710e7ad2766c38039cebe9a219",
+     "why": "keys 13-16: jmp dc_kbd_hook ; nop"
+    },
+    {
+     "id": "delay-control-core-4000B420",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4000b420",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "45bd3ff1d08b81ada459e14389fd5760a1213e1cd272f40e9ea441b16cf1c8dc",
+     "new": [
+      [
+       "hex",
+       "4eb946004898"
+      ]
+     ],
+     "new_sha256": "c52c41e5fe6aa67c21f3afc7c048ffce6d85d5f9a78f1cffcd5e5244a6561ffa",
+     "why": "event dispatcher: jsr dc_ev_hook"
+    },
+    {
+     "id": "delay-control-core-4008F828",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4008f828",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "ea2184a2617a751508d95f31c72ac4f64f9537b22634841c52190c206e1a018e",
+     "new": [
+      [
+       "hex",
+       "4eb9460048e0"
+      ]
+     ],
+     "new_sha256": "b5824ed39d94ccd7c473cf48d9203263cdeec57db504d0609399598e93365e0a",
+     "why": "delay: jsr dc_del_hook (silence while active)"
+    },
+    {
+     "id": "delay-control-core-400908FC",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x400908fc",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "98b283ca1cace777e623dcb23123a1fee8d30b6313ba845ba4c9f03fe7ec01d2",
+     "new": [
+      [
+       "hex",
+       "4eb94600483a"
+      ]
+     ],
+     "new_sha256": "0d1c8bf2ae1288271274501e84fd8942e51d5d2aecb13c4e60c5cd1c6e54da54",
+     "why": "external in level CVs: jsr dc_ext_hook (mute while frozen)"
+    },
+    {
+     "id": "delay-control-core-400903F8",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x400903f8",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "bfacbcd5969772730d46ca4de3e09d044e49113e08792596e65fb5b79c4cfb7e",
+     "new": [
+      [
+       "hex",
+       "4eb946004852"
+      ]
+     ],
+     "new_sha256": "c68246435f083809d172efc0445138467b4bcf52c5998e3d9183b56e69308c09",
+     "why": "analog voice CV loop: jsr dc_mute_hook (mute mask)"
+    },
+    {
+     "id": "delay-control-core-401952C4",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x401952c4",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "8208c1820b31e185a0c715273b19c822b6e280212b67257d28f88b806818f6aa",
+     "new": [
+      [
+       "hex",
+       "42b941b9fa0c"
+      ]
+     ],
+     "new_sha256": "a0b7f963fc4c6f49150efdc4c13ed42c6c393507ce262b6ddd83cfd756b5562f",
+     "why": "DCTL page slot 4: DEST hidden (clr.l)"
+    },
+    {
+     "id": "delay-control-core-4018AD86",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018ad86",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "026aea7aa59e93a09f520116ee5e864518d50a767b55dabbfd99b2897da9c9f7",
+     "new": [
+      [
+       "hex",
+       "46005114"
+      ]
+     ],
+     "new_sha256": "c14b38951ab64dcd923d25ad7065d9ec92d5cdf25a6c165bbee59316bb068502",
+     "why": "id 54 +20: RETRIG formatter (clamped)"
+    },
+    {
+     "id": "delay-control-core-4018AD94",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018ad94",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "c39084d70aa0c0e379d0e484c5b1390d0f881e26b7d1e792ae84154bfc0a53fc",
+     "new": [
+      [
+       "hex",
+       "46005104"
+      ]
+     ],
+     "new_sha256": "8784d15486991afe8454727e83fabcafe0827e5a21e64f59d4985bf83d7e0c41",
+     "why": "id 54 +36: RETRIG box graphic (clamped)"
+    },
+    {
+     "id": "delay-control-core-4022E0A0",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4022e0a0",
+     "len": 8,
+     "kind": "data",
+     "stock_sha256": "b3989b8169b422ca6ce8489b8c5c0c502b0931408222f50ec259f0a22b35391e",
+     "new": [
+      [
+       "hex",
+       "0000080000000000"
+      ]
+     ],
+     "new_sha256": "dc18a1ce81873b758e5d4a7809a900f8f971478008443297fddf46570605a1a2",
+     "why": "id 54: max 0x800 (9 steps), default 0x0"
+    },
+    {
+     "id": "delay-control-core-4018ADC4",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018adc4",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "026aea7aa59e93a09f520116ee5e864518d50a767b55dabbfd99b2897da9c9f7",
+     "new": [
+      [
+       "hex",
+       "46005114"
+      ]
+     ],
+     "new_sha256": "c14b38951ab64dcd923d25ad7065d9ec92d5cdf25a6c165bbee59316bb068502",
+     "why": "id 55 +20: RETRIG formatter (clamped)"
+    },
+    {
+     "id": "delay-control-core-4018ADD6",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018add6",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "c39084d70aa0c0e379d0e484c5b1390d0f881e26b7d1e792ae84154bfc0a53fc",
+     "new": [
+      [
+       "hex",
+       "46005104"
+      ]
+     ],
+     "new_sha256": "8784d15486991afe8454727e83fabcafe0827e5a21e64f59d4985bf83d7e0c41",
+     "why": "id 55 +36: RETRIG box graphic (clamped)"
+    },
+    {
+     "id": "delay-control-core-4022E0D4",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4022e0d4",
+     "len": 8,
+     "kind": "data",
+     "stock_sha256": "5509c0811d9e08ca580f908d8d05cebef4b11a2a2ea06cc937ce8bbfe482a24f",
+     "new": [
+      [
+       "hex",
+       "0000080000000200"
+      ]
+     ],
+     "new_sha256": "1d063952cc18391473fd97c02baeb02d487fbe2348678f47d818c148c94db623",
+     "why": "id 55: max 0x800 (9 steps), default 0x200"
+    },
+    {
+     "id": "delay-control-core-4018AE06",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018ae06",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "026aea7aa59e93a09f520116ee5e864518d50a767b55dabbfd99b2897da9c9f7",
+     "new": [
+      [
+       "hex",
+       "46005114"
+      ]
+     ],
+     "new_sha256": "c14b38951ab64dcd923d25ad7065d9ec92d5cdf25a6c165bbee59316bb068502",
+     "why": "id 56 +20: RETRIG formatter (clamped)"
+    },
+    {
+     "id": "delay-control-core-4018AE14",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018ae14",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "c39084d70aa0c0e379d0e484c5b1390d0f881e26b7d1e792ae84154bfc0a53fc",
+     "new": [
+      [
+       "hex",
+       "46005104"
+      ]
+     ],
+     "new_sha256": "8784d15486991afe8454727e83fabcafe0827e5a21e64f59d4985bf83d7e0c41",
+     "why": "id 56 +36: RETRIG box graphic (clamped)"
+    },
+    {
+     "id": "delay-control-core-4022E108",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4022e108",
+     "len": 8,
+     "kind": "data",
+     "stock_sha256": "18fe2404391fc247d11a1068d281742e1ad78be740aceb3331d2b1844f343ee3",
+     "new": [
+      [
+       "hex",
+       "0000080000000400"
+      ]
+     ],
+     "new_sha256": "36ee5a9e6d1ba7d2499a9db35a8fcf587519569f959f83864d14960375325008",
+     "why": "id 56: max 0x800 (9 steps), default 0x400"
+    },
+    {
+     "id": "delay-control-core-4018AE48",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018ae48",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "026aea7aa59e93a09f520116ee5e864518d50a767b55dabbfd99b2897da9c9f7",
+     "new": [
+      [
+       "hex",
+       "46005114"
+      ]
+     ],
+     "new_sha256": "c14b38951ab64dcd923d25ad7065d9ec92d5cdf25a6c165bbee59316bb068502",
+     "why": "id 57 +20: RETRIG formatter (clamped)"
+    },
+    {
+     "id": "delay-control-core-4018AE56",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018ae56",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "c39084d70aa0c0e379d0e484c5b1390d0f881e26b7d1e792ae84154bfc0a53fc",
+     "new": [
+      [
+       "hex",
+       "46005104"
+      ]
+     ],
+     "new_sha256": "8784d15486991afe8454727e83fabcafe0827e5a21e64f59d4985bf83d7e0c41",
+     "why": "id 57 +36: RETRIG box graphic (clamped)"
+    },
+    {
+     "id": "delay-control-core-4022E13C",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4022e13c",
+     "len": 8,
+     "kind": "data",
+     "stock_sha256": "270386147cac16a419ed0a87d8ee364f201c32eaa5815371a9ce65681ddd30db",
+     "new": [
+      [
+       "hex",
+       "0000080000000600"
+      ]
+     ],
+     "new_sha256": "e45dfed2504782baa4b2c8cfa662a90fcb464a888ee6837507bd9164124319fa",
+     "why": "id 57: max 0x800 (9 steps), default 0x600"
+    },
+    {
+     "id": "delay-control-core-40040B74",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x40040b74",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "4b9f73a6445c6fb5866d405c6a87d9718707ec5fabb6e05fb23a110e30fc2f35",
+     "new": [
+      [
+       "hex",
+       "460050f7"
+      ]
+     ],
+     "new_sha256": "5700628ed76522addb0b5e787ecfa643287b2ccdad77704b686a06a9f63f4e06",
+     "why": "popup Mod B ON -> DelayCtrl ON"
+    },
+    {
+     "id": "delay-control-core-401952A8",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x401952a8",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "66bee1159f8ecb3fdf94e7beaf3d3b31d179e0200c6113b93085f789ee1c8318",
+     "new": [
+      [
+       "hex",
+       "460050ed"
+      ]
+     ],
+     "new_sha256": "d18fb67256350e7cd928442591a2033c68e5eb87a0fd7a1853185618a02ab2ce",
+     "why": "name Mod B -> DelayCtrl"
+    },
+    {
+     "id": "delay-control-core-4019524A",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4019524a",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "1b3dc2dcb0c3c4dc9061acff32d92ee3cf0cfe7a9c307086130ec03614ca2135",
+     "new": [
+      [
+       "hex",
+       "460050e8"
+      ]
+     ],
+     "new_sha256": "85815f32028837c5a0ecfff0a8261f717f3a7a5529eda32cc7b7508567323d6d",
+     "why": "page name MODB -> DCTL"
+    },
+    {
+     "id": "delay-control-core-4004E9BC",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4004e9bc",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "1b3dc2dcb0c3c4dc9061acff32d92ee3cf0cfe7a9c307086130ec03614ca2135",
+     "new": [
+      [
+       "hex",
+       "460050e8"
+      ]
+     ],
+     "new_sha256": "85815f32028837c5a0ecfff0a8261f717f3a7a5529eda32cc7b7508567323d6d",
+     "why": "TrigModListView title MODB -> DCTL"
+    },
+    {
+     "id": "delay-control-core-reg",
+     "mode": "area",
+     "offset": 16384,
+     "len": 4,
+     "kind": "data",
+     "new": [
+      [
+       "hex",
+       "46004c22"
+      ]
+     ],
+     "new_sha256": "953596167736863ed5be04b6f7b03dc62657dbd6bcd1fd9d71abd476d397cb6a",
+     "why": "DC_REG_CORE = dc_core_run (mix hook calls it when nonzero)"
+    },
+    {
+     "id": "delay-control-core-code",
+     "mode": "area",
+     "offset": 18432,
+     "len": 2278,
+     "kind": "code",
+     "new": [
+      [
+       "hex",
+       "41f941b9df00600641f941b9d930202f0008e0806a0270007208b0816f02200143f94600512471b10800e1882f4000082f4800042068000c4ed04ab9460051446708426b0008426b0012223c00007f7f4e7523cb4600514073798000315082b9460051484e752f002f002f022f0a4eb946004ae84fef000c4a806b08588f4ef94002e954201f7223b2806c064ef94002ea9a4ef94002eba64feffff048d703032f2f00182f2f00184eb946004b84508f4cd703034fef00102f2f00082f2f00084eb94000839e508f4feffff048d703034eb946004be64cd703034fef00104e754feffff048d703034eb946004bea4cd703034fef00102f2f000c2f2f000c2f2f000c4eb9400968904fef000c4feffff048d703034eb946004c064cd703034fef00104e75207c4600400820104fefffe448d77c0c4a8067502050246800944a8a67462f0a4eb9400190002f004eb9400160562f004eb940015af64fef000c7203b28057c275024482b280672620394600518c4a80670c42b94600518842b94600517423c24600518c4cd77c0c4fef001c4e752f0a263c4600512d4eb9400186e8588f95ca4df94600512449f946005170264020532a680028486a00362f0b4e95508f7208e080b2806c2a700873b6080020437004123018001981a800528ab08a67a0486a00362f0b4e95508f7208e080b2806dd64a806cd44280204373b608007004123018001981a800528ab08a66d26000ff704fefffe848d700fc2039460051582400d4b94600516026394600515c2c3c000001009483220202810001ffffe7892041d1fc461000002a10282800040c83000003ff62042c03e48e223946005154bc81640222064a816708204391c1b1c063245280b08365024280206f001c23c0460051582085206f002020844cd700fc4fef00184e752c009c83dc812e069483e18f02820001ffffe085e0844c417007e78a223c0000010092874c0158004c0148002042d1fc461000002210e0812c280004e0864c0718004c076800da81d886609042804e752f027003242f00100682ffffffdc41ef000823d046004008b0826406241f70ff4e754ebafe1820394600518c4a8067ec206f000c72017001e5a8c2a800104a816630223946005188468041f946005178c08123c04600518842b02c002039460051884a80660642b9460051747001241f4e75223946005174528141f94600517821812c0024394600518823c146005174808223c046005188700160d22f027201206f000cc2a800102028000c4a81661c0680ffffffdc7203b28065107201e1a9243946005188c4814a826604241f4e75243946005188468141f946005178c28223c14600518842b00c002039460051884a8066d8241f42b9460051744e756000fd3c20394600518c4a806710207c8000dbd04298b1fc8000dcd066f64e7520394600518c4a806710207c8000dcd04298b1fc8000ddd066f64e7522394600518820394600518c4fefffd848d70cfc4a80670003b64a8167000166428393c9428041f94600517822300c00b3c1640622700c00260052807204b28066ea2439402d701041f946005170123038000c82000009606406243c00000960203c149970004c4200000c800001ffe06306203c0001ffe07381e5887404b481630272044c4100002079460051684ab94600516466000360760143f94600516c23c34600516442b94600515042b94600514c23d1460051602200b1c06500035623c14600515c42b94600515891c123c84600515430398000269e34398000272c4a4057c0710044804a426604740280823439800027ba660476048083343980002848660478088084e18823c0460051483039800028ca57c07100448023c0460051444a816700037e260f240f247c8000dad006830000002406820000002047fafcb22f032f024e93508f2039460051502800e18c41ea00040c800000008065000218202f0020508a222f00242540fff82081b5fc8000dbd066c84cd70cfc4fef00284e7534398000269e30398000272c4a4257c2750244824a406604700284803039800027ba6604720484813039800028486604760884834ab946005164671a4ab94600515c56c042b9460051647100ef88448023c04600514c42b946005148227c8000dad042b94600514442812001508952817820d0b94600516c02800001ffffe7882040d1fc4610000020a9fff82169fffc0004b88166d43039800028ca67000204263c800039504a82671408020000660000cee28a0683000000804a8266ec22394600516c06810000002002810001ffff20394600516823c14600516c0c8000020000640c06800000002023c046005168280f260f20394600514c267c8000dad006840000002406830000002045fafb602400e18a4a806700fede2f042e3c000001002f034e92ee8a2013e080222f0028e0819e82508f2a00204b4c0218004c075800202f0024e080508b4c002800d28520c12010e0804c070800d480208220394600514c538023c04600514cb7fc8000dbd0669c4cd70cfc4fef00284e75244393c92009781ad0b94600516c221ae081528902800001ffff4c0418000281ffffff00e7882040d1fc46100000d390d3a800047020b0896700fefa2009781a5289d0b94600516c221ae08102800001ffff4c0418000281ffffff00e7882040d1fc46100000d390d3a800047020b08966926000fec0528023c0460051502c3c000001002012ee8c2a00e085202f0020e080508a9c844c0658004c040800222f0024e0814c041800d0852f4000202810e0842540fff84c064800d2842081b5fc8000dbd06600fd7a6000fdae4cd70cfc42b94600514842b94600516442b94600514c42b94600516842b9460051444fef00284e7522394600515cb0816400fccc23c04600515c42b94600515822006000fcba220823c14600515c42b9460051586000fca893c9247c80003b5020097609d0b94600516c222a00807809e6a1261ae8a302800001ffff5289e189e18be7882040d1fc46100000d790d3a800047020b0896700fdbe2009760978095289d0b94600516c222a0080e6a1261ae8a302800001ffffe189e18be7882040d1fc46100000d790d3a800047020b089668e6000fd82207c8000dad04298b1fc8000dbd06700fcc64298b1fc8000dbd066ea6000fcb8"
+      ]
+     ],
+     "new_sha256": "747dbe1b6f7659197251f3a04b9a2ed94892bdc2d7b27fa550f5c13925781407",
+     "why": "linked code of this package (.text)"
+    },
+    {
+     "id": "delay-control-core-data",
+     "mode": "area",
+     "offset": 20710,
+     "len": 170,
+     "kind": "data",
+     "new": [
+      [
+       "hex",
+       "00004443544c0044656c61794374726c0044656c61794374726c204f4e00000000000000000046004ae446004808000000000000000046004ae44600480003050608090b0c0e0f010203040506080a0c101418202830405000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000408102000000000000000000000000000000000000000000000000000000000"
+      ]
+     ],
+     "new_sha256": "8c2527e7af302e67fcde588ac145ca054e743a873e1bd1269a786483632f4287",
+     "why": "constants and data of this package"
+    }
+   ]
+  }
+ ]
+}

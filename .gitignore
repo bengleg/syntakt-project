@@ -1,0 +1,79 @@
+# ---------------------------------------------------------------
+# MAI byte del firmware Elektron nel repo (vedi LEGAL.md).
+# Questa e' la prima linea di difesa; la seconda e' l'hook
+# tools/hooks/pre-commit (attivalo con: git config core.hooksPath tools/hooks).
+# ---------------------------------------------------------------
+*.syx
+*.SYX
+*.bin
+*.raw
+*.elf
+*.img
+*.smz4
+*.elemod
+
+# Firmware stock scaricato da elektron.se: resta solo in locale
+firmware/*
+!firmware/README.md
+
+# Output di unpack/build
+unpacked/
+build/out/
+out/
+dist-mods/
+
+# Dipendenze esterne clonate/compilate in locale (tools/unpack/setup_eft.sh)
+third_party/
+
+# Ghidra: il progetto contiene il firmware disassemblato -> mai nel repo
+*.gpr
+*.rep/
+ghidra/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Node
+node_modules/
+
+# Pagina di build: il bundle contiene il motore GPL (ELEKLOADER_JS), mai nel repo
+web/dist/
+web/src/engine.generated.mjs
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Manuali e datasheet di terzi (copyright NXP/Elektron): solo in locale
+refs/
+*.pdf
+
+# Note di lavoro locali (journal, brief, strumenti di studio): mai pubblicate
+local/
+
+# registrazioni delle misure (tools/measure)
+rec/
+
+# ---------------------------------------------------------------
+# Syntakt_Project: i vecchi alberi di lavoro restano fuori dal repo.
+# Il contenuto e' stato importato qui; la loro storia vive in
+# ..\Default Project\Synthack-OS (rami private/*).
+# ---------------------------------------------------------------
+builder-web/
+builder-r1/
+synfact-dev/
+
+# Toolchain e archivi di terzi: pesanti (centinaia di MB, lo zip supera il limite
+# GitHub di 100 MB). Restano in locale; vedi NOTICE.md e docs/BUILDING.md.
+tools/llvm-mingw-*/
+tools/llvm-mingw.zip
+tools/sgdk/
+tools/*.7z
+tools/*.zip
+tools/eft-src/
+tools/eft-build/
+tools/elektron-firmware-tool.exe

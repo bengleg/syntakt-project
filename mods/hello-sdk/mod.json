@@ -1,0 +1,18 @@
+{
+  "id": "hello-sdk",
+  "title": "Hello SDK example",
+  "version": "0.1",
+  "author": "SDK example",
+  "target": {"device": "Syntakt", "os": "1.41"},
+  "requires": [],
+  "sources": ["main.c"],
+  "entry": "hello_entry",
+  "slot": "dev",
+  "hooks": [],
+  "info": {
+    "summary": "A counter that counts its own calls. It has no hooks, so it changes nothing in the OS yet.",
+    "claims": [],
+    "conflicts": [],
+    "cost": null
+  }
+}

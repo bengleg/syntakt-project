@@ -1,0 +1,222 @@
+{
+ "note": "Lists addresses already hooked by the shipped DelayCtrl and OS packages in web/patches. Taken from the packages' addresses, lengths and why text only. Advisory: the SDK warns when a mod hook lands on one of these; it does not block the build unless --strict is used.",
+ "taken": [
+  {
+   "package": "delay-control-core",
+   "addr": "0x4002ea92",
+   "len": 8,
+   "area": "keyboard keys 13-16",
+   "why": "keys 13-16: jmp dc_kbd_hook ; nop"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4000b420",
+   "len": 6,
+   "area": "event dispatcher",
+   "why": "event dispatcher: jsr dc_ev_hook"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4008f828",
+   "len": 6,
+   "area": "FX delay silence",
+   "why": "delay: jsr dc_del_hook (silence while active)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x400908fc",
+   "len": 6,
+   "area": "external input level CVs",
+   "why": "external in level CVs: jsr dc_ext_hook (mute while frozen)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x400903f8",
+   "len": 6,
+   "area": "analog voice CV mute mask",
+   "why": "analog voice CV loop: jsr dc_mute_hook (mute mask)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x401952c4",
+   "len": 6,
+   "area": "DCTL page slot 4 DEST",
+   "why": "DCTL page slot 4: DEST hidden (clr.l)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018ad86",
+   "len": 4,
+   "area": "DCTL RETRIG formatter, id 54",
+   "why": "id 54 +20: RETRIG formatter (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018ad94",
+   "len": 4,
+   "area": "DCTL RETRIG box graphic, id 54",
+   "why": "id 54 +36: RETRIG box graphic (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4022e0a0",
+   "len": 8,
+   "area": "DCTL rate list, id 54",
+   "why": "id 54: max 0x800 (9 steps), default 0x0"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018adc4",
+   "len": 4,
+   "area": "DCTL RETRIG formatter, id 55",
+   "why": "id 55 +20: RETRIG formatter (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018add6",
+   "len": 4,
+   "area": "DCTL RETRIG box graphic, id 55",
+   "why": "id 55 +36: RETRIG box graphic (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4022e0d4",
+   "len": 8,
+   "area": "DCTL rate list, id 55",
+   "why": "id 55: max 0x800 (9 steps), default 0x200"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018ae06",
+   "len": 4,
+   "area": "DCTL RETRIG formatter, id 56",
+   "why": "id 56 +20: RETRIG formatter (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018ae14",
+   "len": 4,
+   "area": "DCTL RETRIG box graphic, id 56",
+   "why": "id 56 +36: RETRIG box graphic (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4022e108",
+   "len": 8,
+   "area": "DCTL rate list, id 56",
+   "why": "id 56: max 0x800 (9 steps), default 0x400"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018ae48",
+   "len": 4,
+   "area": "DCTL RETRIG formatter, id 57",
+   "why": "id 57 +20: RETRIG formatter (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4018ae56",
+   "len": 4,
+   "area": "DCTL RETRIG box graphic, id 57",
+   "why": "id 57 +36: RETRIG box graphic (clamped)"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4022e13c",
+   "len": 8,
+   "area": "DCTL rate list, id 57",
+   "why": "id 57: max 0x800 (9 steps), default 0x600"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x40040b74",
+   "len": 4,
+   "area": "Mod B popup text",
+   "why": "popup Mod B ON -> DelayCtrl ON"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x401952a8",
+   "len": 4,
+   "area": "Mod B name label",
+   "why": "name Mod B -> DelayCtrl"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4019524a",
+   "len": 4,
+   "area": "MODB page name",
+   "why": "page name MODB -> DCTL"
+  },
+  {
+   "package": "delay-control-core",
+   "addr": "0x4004e9bc",
+   "len": 4,
+   "area": "trig mod list title",
+   "why": "TrigModListView title MODB -> DCTL"
+  },
+  {
+   "package": "delay-control-dj",
+   "addr": "0x40095fa6",
+   "len": 6,
+   "area": "FX filter CVs (DJ filter)",
+   "why": "FX filter CVs: jsr dc_flt_hook (DJ type)"
+  },
+  {
+   "package": "delay-control-dj",
+   "addr": "0x401d4710",
+   "len": 4,
+   "area": "FX filter type name (DJ)",
+   "why": "filter type 6 name LPN -> DJ"
+  },
+  {
+   "package": "delay-control-dj",
+   "addr": "0x4018c794",
+   "len": 4,
+   "area": "FX filter TYPE icon (DJ)",
+   "why": "FX filter TYPE icon: invoker -> dc_tgfx (DJ text)"
+  },
+  {
+   "package": "delay-control-dj",
+   "addr": "0x40042646",
+   "len": 6,
+   "area": "filter tab curve (DJ)",
+   "why": "filter tab curve: jsr dc_fdraw_hook (DJ as LP2/HP2)"
+  },
+  {
+   "package": "delay-control-syn",
+   "addr": "0x40195156",
+   "len": 6,
+   "area": "FX SYN page init",
+   "why": "FX SYN page init: jsr dc_syn_stub (slots 1-7)"
+  },
+  {
+   "package": "delay-control-runtime",
+   "addr": "0x4002e850",
+   "len": 8,
+   "area": "key event entry",
+   "why": "consumeKeyEvent entry: jsr dc_entry_hook ; nop"
+  },
+  {
+   "package": "delay-control-runtime",
+   "addr": "0x4008fb04",
+   "len": 10,
+   "area": "FX bus mix",
+   "why": "after FX bus sums: jsr dc_mix_hook ; nop ; nop"
+  },
+  {
+   "package": "modarea",
+   "addr": "0x40338d80",
+   "len": 138,
+   "area": "mod area loader",
+   "why": "mod area loader: decompress the area stream to RAM, zero the rest, jump back"
+  },
+  {
+   "package": "modarea",
+   "addr": "0x400004b2",
+   "len": 8,
+   "area": "BSS clear start (mod area loader)",
+   "why": "start of the BSS clear: jmp modarea_reloc ; nop"
+  }
+ ]
+}

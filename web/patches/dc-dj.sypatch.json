@@ -1,0 +1,128 @@
+{
+ "format": "synthack-patchset",
+ "schema": 1,
+ "id": "delay-control-dj",
+ "title": "DJ filter",
+ "encoding": "lowercase-hex",
+ "requires": [
+  "modarea",
+  "delay-control-runtime"
+ ],
+ "target": {
+  "device": "Syntakt",
+  "os": "1.41",
+  "stock_sha256": "8e2488f462c4a5656396a895f113bcd415e9900fa8709340dccf45d4cb9ed19e"
+ },
+ "area": {
+  "img": "0x40348000",
+  "ram": "0x46000000",
+  "size": "0x10000",
+  "compress": "shlz"
+ },
+ "units": [
+  {
+   "id": "delay-control-dj",
+   "title": "DJ filter",
+   "blocks": [
+    {
+     "id": "delay-control-dj-40095FA6",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x40095fa6",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "631c79b2d7a3d89e557f0cfcbae7bbf6e8f0e89cb1a7c57a4e675deb5d02ba04",
+     "new": [
+      [
+       "hex",
+       "4eb946006000"
+      ]
+     ],
+     "new_sha256": "f91100f9ed6723ec251728037de999d52ae3baef76d44fed079d74553e9df863",
+     "why": "FX filter CVs: jsr dc_flt_hook (DJ type)"
+    },
+    {
+     "id": "delay-control-dj-401D4710",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x401d4710",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "bc7ff3076d0bcff96ec2de83133a89bd8df4d6c1f58f53a25d92ed07b47f04c2",
+     "new": [
+      [
+       "hex",
+       "460062e8"
+      ]
+     ],
+     "new_sha256": "fdd63396748959e3314b11c792575334f4fa5de4499c2fcce415c770e4c0010f",
+     "why": "filter type 6 name LPN -> DJ"
+    },
+    {
+     "id": "delay-control-dj-4018C794",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4018c794",
+     "len": 4,
+     "kind": "data",
+     "stock_sha256": "b3cb716769ddfa7e3f87dbc2c0ccc9786f00e2cc472fdd43ee76cc738aa399b1",
+     "new": [
+      [
+       "hex",
+       "46006054"
+      ]
+     ],
+     "new_sha256": "ddf6628ecec11f5ee8cb2a6ec545a42804bf2451cfe469ef2516224438351e66",
+     "why": "FX filter TYPE icon: invoker -> dc_tgfx (DJ text)"
+    },
+    {
+     "id": "delay-control-dj-40042646",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x40042646",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "d4baf6bc5f77eb2445de2371df8439448159cf72e9d9f99ea6c1100eb317bd56",
+     "new": [
+      [
+       "hex",
+       "4eb94600602a"
+      ]
+     ],
+     "new_sha256": "2f65f201799a481e063382a550e054166d5bf00d0ae058c9521685d4c3680fe8",
+     "why": "filter tab curve: jsr dc_fdraw_hook (DJ as LP2/HP2)"
+    },
+    {
+     "id": "delay-control-dj-code",
+     "mode": "area",
+     "offset": 24576,
+     "len": 736,
+     "kind": "code",
+     "new": [
+      [
+       "hex",
+       "4feffff048d703032f0b2f0a4eb94600607e508f4a806b0224004cd703034fef0010102a00a472f84e754feffff048d703032f0c2f0648574eb9460061f2588f2c1f285f4cd703034fef001047f9400391604e75202f0008e0807206b28067064ef940070b102f2f00142f2f00142f2f00144eb9460062a24fef000c4e754feffff448d7040c226f0014246f00107129071c5d804a806600014e71e9071e0c8000003fff630000b624000682ffffc0000c8200003f006306243c00003f00203c00007f004c002800263c00003f0070034c4320027369073026020681ffffc000d683d281204391c1b1fc0000fe006f0000ae207c0000fe0041e88000d2833548004a0c810000fe006f0000b0223c0000fe000681ffff80003541004c761e123943bdc044c2834a01672873290720207c40249b187601b6806700008ce08a32301a00207c40249a1830702a0092883541004e4cd7040c4fef000c4e750c8000003f006306203c00003f00243c00007f004c002800263c00003f0070014c4320027369073026020681ffffc000d683d281204391c1b1fc0000fe006e00ff564a886c00ff5691c841e88000d2833548004a0c810000fe006e00ff544a816c00ff5442816000ff4ee08a207c40249d1832301a00207c40249a1830702a0092883541004e6000ff6e4cd7040c70ff4fef000c4e75207c460040084feffff4201048d7040c246f00104a80676220502f2800a04eb94001ff74588f720cb280664e1039800028cc7207c28024815d814a81663c202a00040c8000003fff633a0680ffffc0000c8000003f006306203c00003f00223c00007f004c010800263c00003f00720324814c430000254000044cd7040c4fef000c4e750c8000003f006306203c00003f00223c00007f004c010800263c00003f00720124814c4300002540000460ca4879460062e84879460062e04879460062e342a748780001202f00205a802f00202f002050802f002f3c402a91c02f2f00244eb9400f8c184fef00244e75"
+      ]
+     ],
+     "new_sha256": "3c3f4a8f3b1f9c80a672df79303ee5ce9d669647b82a3daa4f7e9cfa9eeb7286",
+     "why": "linked code of this package (.text)"
+    },
+    {
+     "id": "delay-control-dj-data",
+     "mode": "area",
+     "offset": 25312,
+     "len": 11,
+     "kind": "data",
+     "new": [
+      [
+       "hex",
+       "2573005858585800444a00"
+      ]
+     ],
+     "new_sha256": "a94e4036e6e051e3d4a0f14525613459a8c1a860fb4b78e529a47280b685a3e1",
+     "why": "constants and data of this package"
+    }
+   ]
+  }
+ ]
+}

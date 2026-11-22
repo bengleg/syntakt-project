@@ -1,0 +1,55 @@
+{
+  "budget": {
+    "noticeable": 1000,
+    "heavy": 3000,
+    "note": "Guidance from docs/modding-guide.md: a few thousand per audio block starts to make the screen lag. Owner to calibrate."
+  },
+  "packages": {
+    "modarea": {
+      "summary": "Gives mods room inside the Syntakt to keep their code.",
+      "claims": [],
+      "conflicts": [],
+      "cost": null
+    },
+    "delay-control-runtime": {
+      "summary": "Shared DelayCtrl code that the features need. It is added for you.",
+      "claims": [],
+      "conflicts": [],
+      "cost": null
+    },
+    "delay-control-core": {
+      "summary": "Freeze and beat repeat on the FX track, TRIG 13-16 on MOD B.",
+      "claims": [
+        "ui:TRIG 13-16 on the FX track",
+        "ui:MOD B setup page (DCTL)",
+        "audio:FX-block digital bus"
+      ],
+      "conflicts": [],
+      "cost": null
+    },
+    "delay-control-dj": {
+      "summary": "DJ filter replaces LP-Notch in the FX filter list.",
+      "claims": [
+        "param:FX filter TYPE list entry 6"
+      ],
+      "conflicts": [],
+      "cost": null
+    },
+    "delay-control-drive": {
+      "summary": "Adds a rectifier to FX Drive 5 to 11, for digital tracks only.",
+      "claims": [
+        "param:FX Drive 5 to 11"
+      ],
+      "conflicts": [],
+      "cost": null
+    },
+    "delay-control-syn": {
+      "summary": "Shortcuts on the FX SYN page: reverb, send, filter and Drive.",
+      "claims": [
+        "ui:FX SYN page slots"
+      ],
+      "conflicts": [],
+      "cost": null
+    }
+  }
+}

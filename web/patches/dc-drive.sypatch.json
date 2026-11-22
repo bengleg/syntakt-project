@@ -1,0 +1,60 @@
+{
+ "format": "synthack-patchset",
+ "schema": 1,
+ "id": "delay-control-drive",
+ "title": "Drive rectifier",
+ "encoding": "lowercase-hex",
+ "requires": [
+  "modarea",
+  "delay-control-runtime"
+ ],
+ "target": {
+  "device": "Syntakt",
+  "os": "1.41",
+  "stock_sha256": "8e2488f462c4a5656396a895f113bcd415e9900fa8709340dccf45d4cb9ed19e"
+ },
+ "area": {
+  "img": "0x40348000",
+  "ram": "0x46000000",
+  "size": "0x10000",
+  "compress": "shlz"
+ },
+ "units": [
+  {
+   "id": "delay-control-drive",
+   "title": "Drive rectifier",
+   "blocks": [
+    {
+     "id": "delay-control-drive-reg",
+     "mode": "area",
+     "offset": 16388,
+     "len": 4,
+     "kind": "data",
+     "new": [
+      [
+       "hex",
+       "46006800"
+      ]
+     ],
+     "new_sha256": "4ab2298d62ff16b9498bd5b0c93ddbd29bea940e2aad21458428eca73accbc67",
+     "why": "DC_REG_DRIVE = dc_drive_run (mix hook calls it when nonzero)"
+    },
+    {
+     "id": "delay-control-drive-code",
+     "mode": "area",
+     "offset": 26624,
+     "len": 170,
+     "kind": "code",
+     "new": [
+      [
+       "hex",
+       "3039800028f04feffff448d7001c71c00c80000039ba63560680ffffc646e188263c000001000c8000458b45635a283c00000100207c8000dad09883227c7fffffff201022004a806d2e2401e080e0820c8300000100670c4c0328004c0408002200d28220c1b1fc8000dbd066d44cd7001c4fef000c4e750c80800000006704448160c6220960c22600223c000045464c413003283c00000100207c8000dad0227c7fffffff98836098"
+      ]
+     ],
+     "new_sha256": "cab02f135a79aa6dd9ea87936c3be7e09dad5e22d0cb89d840ba91998847394f",
+     "why": "linked code of this package (.text)"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+{
+ "format": "synthack-patchset",
+ "schema": 1,
+ "id": "delay-control-syn",
+ "title": "FX SYN page",
+ "encoding": "lowercase-hex",
+ "requires": [
+  "modarea"
+ ],
+ "target": {
+  "device": "Syntakt",
+  "os": "1.41",
+  "stock_sha256": "8e2488f462c4a5656396a895f113bcd415e9900fa8709340dccf45d4cb9ed19e"
+ },
+ "area": {
+  "img": "0x40348000",
+  "ram": "0x46000000",
+  "size": "0x10000",
+  "compress": "shlz"
+ },
+ "units": [
+  {
+   "id": "delay-control-syn",
+   "title": "FX SYN page",
+   "blocks": [
+    {
+     "id": "delay-control-syn-40195156",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x40195156",
+     "len": 6,
+     "kind": "code",
+     "stock_sha256": "c3430cd5a85c9889dabf71ed5a5dadfc0a8daa17ddc538659037c2f07697a66b",
+     "new": [
+      [
+       "hex",
+       "4eb946006c00"
+      ]
+     ],
+     "new_sha256": "abd4beefc2c539db508c3c69fc97e68b19c75afd55518f27a9ccea5bf27a6fab",
+     "why": "FX SYN page init: jsr dc_syn_stub (slots 1-7)"
+    },
+    {
+     "id": "delay-control-syn-code",
+     "mode": "area",
+     "offset": 27648,
+     "len": 78,
+     "kind": "code",
+     "new": [
+      [
+       "hex",
+       "2f00707823c041b9f950707923c041b9f954707523c041b9f958203c0000009823c041b9f95c203c0000008523c041b9f960203c0000008623c041b9f964203c0000008f23c041b9f968201f4e75"
+      ]
+     ],
+     "new_sha256": "be03938fe2370b052668369c72de4aebaff0daf0a1c366f0d5ce24435676960d",
+     "why": "linked code of this package (.text)"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "dc-diag",
+  "os": "1.41",
+  "requires": [
+    "modarea"
+  ],
+  "description": "Diagnostic: popups showing key codes and held keys for keys 13-16. No behavior change.",
+  "generated_by": "mods/dc-diag/make_patch.py",
+  "symbols": {
+    "dg_ev": "0x46004058",
+    "dg_kbd": "0x460040ec",
+    "dg_ev_hook": "0x46004032",
+    "dg_kbd_hook": "0x46004000",
+    "dg_held": "0x46004178"
+  },
+  "patches": [
+    {
+      "section": 3,
+      "addr": "0X4034C000",
+      "len": 384,
+      "append": true,
+      "hex": "4feffff048d703032f002f022f0a4eb9460040ec4fef000c4cd703034fef00107223b2806c064ef94002ea9a4ef94002eba64feffff048d703032f2f00182f2f00184eb946004058508f4cd703034fef00104ef94000839e4feffff0723f206f001848d7003c2028000c26280010b280655e7a1f7201ca802400ea8a41f94600417828302c00eba908030000674c828421812c00740322000681ffffffdcb481652e2239460041744a8167244ab946004170661c2f102f394600417c2f0048794600414e2f014eb9400c33d04fef00144cd7003c4fef00104e754681c28421812c004cd7003c4fef00104e752f0376032f02206f000c222f001420280098206f001023c04600417424280010204141e8ffdcb688653276012f39460041782f394600417c23c346004170c6822f032f0148794600415d2f004eb9400c33d042b9460041704fef0018241f261f4e754525642048253038782e25303878004b2564204425642048253038782e253038780000000000000000000000000000000000",
+      "ram": "0x46004000",
+      "what": "(mod area) diag.c"
+    },
+    {
+      "section": 3,
+      "addr": "0X4002EA92",
+      "len": 8,
+      "expect_sha256": "658707c783d5eb4c3e3fcb65eef1fb4e7c52116dc6736696f40face28028f6b8",
+      "hex": "4ef9460040004e71",
+      "what": "keys 13-16: jmp dg_kbd_hook ; nop"
+    },
+    {
+      "section": 3,
+      "addr": "0X4000B420",
+      "len": 6,
+      "expect_sha256": "45bd3ff1d08b81ada459e14389fd5760a1213e1cd272f40e9ea441b16cf1c8dc",
+      "hex": "4eb946004032",
+      "what": "event dispatcher: jsr dg_ev_hook"
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Private browser tool that builds a patched Syntakt OS 1.41 file from your own OS file. Nothing is uploaded.">
+  <title>Syntakt OS 1.41 patch builder (private)</title>
+  <style>
+    /* Geist dark palette (approximate values of the Geist scales; no external font or CDN requests) */
+    :root {
+      --ds-background-100: #000;
+      --ds-background-200: #0a0a0a;
+      --ds-gray-100: #111;
+      --ds-gray-200: #1a1a1a;
+      --ds-gray-300: #232323;
+      --ds-gray-400: #2e2e2e;
+      --ds-gray-500: #454545;
+      --ds-gray-600: #5a5a5a;
+      --ds-gray-700: #3a3a3a;
+      --ds-gray-800: #262626;
+      --ds-gray-900: #a1a1a1;
+      --ds-gray-1000: #ededed;
+      --ds-blue-700: #0070f3;
+      --ds-blue-800: #0761d1;
+      --ds-blue-bg: rgba(0, 112, 243, .14);
+      --ds-red-700: #e5484d;
+      --ds-red-bg: rgba(229, 72, 77, .14);
+      --ds-green-700: #46a758;
+      --ds-green-bg: rgba(70, 167, 88, .14);
+      --ds-amber-700: #f5a623;
+      --ds-amber-bg: rgba(245, 166, 35, .14);
+      --radius: 8px;
+      --font-sans: Geist, "Segoe UI", system-ui, -apple-system, sans-serif;
+      --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { overflow-x: hidden; }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+    body {
+      margin: 0;
+      background: var(--ds-background-100);
+      color: var(--ds-gray-1000);
+      font: 14px/1.5 var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      overflow-wrap: anywhere;
+    }
+    main { max-width: 46rem; margin: 2rem auto 0; padding: 0 1.25rem; }
+    h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.04em; line-height: 1.2; margin: 0 0 .5rem; }
+    h2 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--ds-gray-1000); margin: 0 0 .75rem; display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+    h3 { font-size: 13px; font-weight: 600; color: var(--ds-gray-1000); margin: 1rem 0 .4rem; }
+    .lede { color: var(--ds-gray-900); margin: 0 0 2rem; }
+    details.card {
+      background: var(--ds-background-200);
+      border: 1px solid var(--ds-gray-400);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    details.card summary { cursor: pointer; font-weight: 600; color: var(--ds-gray-1000); }
+    details.card ol { margin: .5rem 0; padding-left: 1.25rem; }
+    details.card ol li + li { margin-top: .25rem; }
+    details.more { margin-top: .75rem; }
+    details.more summary { cursor: pointer; color: var(--ds-gray-1000); font-size: 13px; font-weight: 500; }
+    details.more p { margin: .5rem 0 0; }
+    section {
+      background: var(--ds-background-200);
+      border: 1px solid var(--ds-gray-400);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      scroll-margin-top: 9rem;
+    }
+    .muted { color: var(--ds-gray-900); font-size: 13px; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    .skip {
+      position: absolute; left: 1rem; top: -4rem; z-index: 20;
+      background: var(--ds-gray-1000); color: var(--ds-background-100);
+      border-radius: 6px; padding: .5rem .9rem; font-weight: 500; text-decoration: none;
+    }
+    .skip:focus { top: 1rem; }
+
+    /* Top bar with the four steps */
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(0, 0, 0, .92);
+      border-bottom: 1px solid var(--ds-gray-400);
+    }
+    .topbar-inner { max-width: 46rem; margin: 0 auto; padding: .6rem 1.25rem; display: grid; gap: .5rem; }
+    .brand { font-weight: 600; letter-spacing: -0.02em; font-size: 14px; }
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .4rem; }
+    .steps a {
+      display: flex; flex-direction: column; gap: 0; min-height: 36px; justify-content: center;
+      padding: .25rem .5rem; border-radius: 6px; border: 1px solid var(--ds-gray-400);
+      color: var(--ds-gray-1000); text-decoration: none; font-size: 12px; font-weight: 500;
+    }
+    .steps a:hover { background: var(--ds-gray-200); }
+    .steps .state { font-size: 11px; font-weight: 400; color: var(--ds-gray-900); }
+    .steps li[data-state="done"] .state { color: var(--ds-green-700); }
+    .steps li[data-state="blocked"] .state { color: var(--ds-red-700); }
+    .steps li[data-state="blocked"] a { border-color: var(--ds-red-700); }
+    .steps li[data-state="done"] a { border-color: var(--ds-gray-700); }
+
+    /* Badges next to section titles */
+    .badge {
+      font-size: 11px; font-weight: 500; line-height: 1; padding: .3rem .5rem; border-radius: 999px;
+      background: var(--ds-gray-200); color: var(--ds-gray-900); border: 1px solid var(--ds-gray-400);
+    }
+    .badge[data-tone="ok"] { background: var(--ds-green-bg); color: var(--ds-green-700); border-color: transparent; }
+    .badge[data-tone="warn"] { background: var(--ds-amber-bg); color: var(--ds-amber-700); border-color: transparent; }
+    .badge[data-tone="err"] { background: var(--ds-red-bg); color: var(--ds-red-700); border-color: transparent; }
+    .badge[data-tone="info"] { background: var(--ds-blue-bg); color: var(--ds-gray-1000); border-color: transparent; }
+    .step-no {
+      display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+      border: 1px solid var(--ds-gray-500); color: var(--ds-gray-1000); font-size: 12px; font-weight: 500;
+    }
+
+    fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+    label.check { display: flex; gap: .6rem; align-items: center; font-weight: 500; min-height: 36px; }
+    input[type="checkbox"] { accent-color: var(--ds-gray-1000); margin: 0; width: 16px; height: 16px; flex: none; }
+    label:has(input:disabled) { color: var(--ds-gray-900); }
+    button {
+      font: inherit; font-weight: 500;
+      display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+      min-height: 36px; padding: 0 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--ds-gray-1000);
+      background: var(--ds-gray-1000);
+      color: var(--ds-background-100);
+      cursor: pointer;
+      transition: background .12s, border-color .12s;
+    }
+    button:hover:not(:disabled) { background: var(--ds-gray-900); border-color: var(--ds-gray-900); }
+    button:active:not(:disabled) { background: var(--ds-gray-500); border-color: var(--ds-gray-500); }
+    button:focus-visible, input:focus-visible, a:focus-visible, .steps a:focus-visible {
+      outline: 2px solid var(--ds-blue-700); outline-offset: 2px;
+    }
+    button:disabled { opacity: .4; cursor: not-allowed; }
+    button.secondary {
+      background: var(--ds-gray-200); color: var(--ds-gray-1000); border-color: var(--ds-gray-500);
+    }
+    button.secondary:hover:not(:disabled) { background: var(--ds-gray-300); border-color: var(--ds-gray-500); }
+    button.secondary:active:not(:disabled) { background: var(--ds-gray-400); }
+    button.text {
+      background: transparent; border-color: transparent; color: var(--ds-gray-1000);
+      text-decoration: underline; text-underline-offset: 3px; padding: 0 .5rem;
+    }
+    button.text:hover:not(:disabled) { background: var(--ds-gray-200); border-color: transparent; color: var(--ds-gray-1000); }
+    button.text:active:not(:disabled) { background: var(--ds-gray-300); }
+    button.danger { color: var(--ds-red-700); }
+    .row { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    #elapsed { font-family: var(--font-mono); font-size: 12px; color: var(--ds-gray-900); }
+
+    /* Build button with spinner */
+    .spinner {
+      display: none; width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid currentColor; border-right-color: transparent;
+      animation: spin .8s linear infinite;
+    }
+    button.busy .spinner { display: inline-block; }
+    button.busy:disabled { opacity: 1; cursor: progress; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #build-why {
+      margin: .75rem 0 0; padding: .6rem .8rem;
+      border: 1px solid var(--ds-gray-400); border-radius: 6px; background: var(--ds-gray-100);
+      color: var(--ds-gray-1000); font-size: 13px;
+    }
+    #build-why:empty { display: none; }
+    #status { min-height: 1.5em; margin: .75rem 0 0; color: var(--ds-gray-900); overflow-wrap: anywhere; }
+    #status.ok { color: var(--ds-green-700); }
+    #status.err { color: var(--ds-red-700); }
+    #status.ok::before { content: "\2713\00a0"; }
+    #status.err::before { content: "\2715\00a0"; }
+    #result { margin-top: 1rem; }
+    #result[hidden] { display: none; }
+    .kv { display: grid; gap: .35rem; }
+    code {
+      font-family: var(--font-mono); font-size: 12px;
+      background: var(--ds-gray-200); border: 1px solid var(--ds-gray-400);
+      padding: .1rem .35rem; border-radius: 4px; word-break: break-all;
+    }
+    .sha-row { display: flex; align-items: flex-start; gap: .5rem; flex-wrap: wrap; }
+    .sha-row code { flex: 1 1 14rem; min-width: 0; padding: .45rem .5rem; line-height: 1.5; }
+    #copy-status { min-height: 1.2em; }
+    #match.ok { color: var(--ds-green-700); }
+    #match.warn { color: var(--ds-amber-700); }
+    #match:empty { display: none; }
+    .checks { display: grid; gap: .5rem; margin-bottom: .75rem; }
+    .checks:empty { display: none; }
+    ol#plan { margin: 0 0 .5rem; padding-left: 1.25rem; }
+    #plan-error { color: var(--ds-red-700); margin: 0 0 .5rem; }
+    #plan-error:empty { display: none; }
+    #applied:empty { display: none; }
+    a.download {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 1rem;
+      border-radius: 6px; font-weight: 500; text-decoration: none;
+      background: var(--ds-blue-700); color: #fff; border: 1px solid var(--ds-blue-700);
+    }
+    a.download:hover { background: var(--ds-blue-800); border-color: var(--ds-blue-800); }
+    a.download:active { background: var(--ds-blue-800); }
+    .feature-row { display: grid; gap: .15rem; }
+    .feature-row .row { margin: .1rem 0 0 1.65rem; }
+    .note { margin: 0 0 0 1.65rem; color: var(--ds-gray-900); font-size: 13px; }
+    .note div { margin: 0; }
+    .note div.warn { color: var(--ds-amber-700); }
+    .panel { border: 1px solid var(--ds-gray-400); border-radius: var(--radius); padding: .75rem 1rem; margin-top: 1rem; }
+    .panel[hidden] { display: none; }
+    .panel p { margin: .35rem 0 0; }
+    .bar { height: 8px; background: var(--ds-gray-300); border-radius: 4px; overflow: hidden; margin-top: .4rem; }
+    .bar[hidden] { display: none; }
+    .bar > div { height: 100%; width: 0; background: var(--ds-gray-1000); }
+    #conflicts p.conflict { color: var(--ds-red-700); margin: .35rem 0 0; }
+    p.conflict { color: var(--ds-red-700); }
+    p.conflict:empty { display: none; }
+    #imports-empty[hidden] { display: none; }
+
+    /* Shared tick toolbar in the features card */
+    .bulk { justify-content: space-between; margin-bottom: .5rem; }
+    .bulk .count { font-variant-numeric: tabular-nums; }
+
+    /* Alternative single-file block */
+    .alt {
+      border: 1px dashed var(--ds-gray-500); border-radius: var(--radius);
+      padding: .85rem 1rem; margin-top: 1rem; background: var(--ds-background-100);
+    }
+    .alt h3 { margin-top: 0; }
+    .alt p { margin: .25rem 0 0; }
+
+    /* Drop zones */
+    .drop {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .6rem .9rem;
+      border: 1px dashed var(--ds-gray-500); border-radius: var(--radius);
+      padding: .9rem 1rem; margin: .25rem 0 .75rem; background: var(--ds-gray-100);
+    }
+    .drop.over { border-color: var(--ds-blue-700); background: var(--ds-blue-bg); }
+    .drop[data-disabled="true"] { opacity: .5; }
+    .drop .hint { color: var(--ds-gray-900); font-size: 13px; }
+    .chosen {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem;
+      border: 1px solid var(--ds-gray-400); border-radius: var(--radius); padding: .6rem .8rem; margin-bottom: .75rem;
+    }
+    .chosen[hidden] { display: none; }
+    .chosen .name { font-family: var(--font-mono); font-size: 13px; overflow-wrap: anywhere; }
+    .chosen .size { color: var(--ds-gray-900); font-size: 12px; margin-left: .4rem; }
+
+    /* Before you flash */
+    .flash-note {
+      border: 1px solid var(--ds-gray-400); border-left: 3px solid var(--ds-amber-700);
+      border-radius: var(--radius); padding: .8rem 1rem; margin-top: 1rem; background: var(--ds-gray-100);
+    }
+    .flash-note h3 { margin-top: 0; }
+    .flash-note ul { margin: .25rem 0 0; padding-left: 1.2rem; color: var(--ds-gray-900); font-size: 13px; }
+    .flash-note li + li { margin-top: .25rem; }
+
+    .foot { max-width: 46rem; margin: 2rem auto 2.5rem; padding: 0 1.25rem; }
+    .foot p { margin: 0; color: var(--ds-gray-900); font-size: 13px; }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      section { padding: 1rem; }
+      .steps a { padding: .25rem .3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .spinner { animation: none; border-right-color: currentColor; opacity: .7; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="brand">Syntakt patch builder</span>
+      <nav aria-label="Build steps">
+        <ol class="steps" id="steps">
+          <li data-state="todo" data-step="features"><a href="#features"><span>1 Features</span><span class="state" id="state-features">To do</span></a></li>
+          <li data-state="todo" data-step="mods"><a href="#mods"><span>2 Mods</span><span class="state" id="state-mods">To do</span></a></li>
+          <li data-state="todo" data-step="os-file"><a href="#os-file"><span>3 OS file</span><span class="state" id="state-os-file">To do</span></a></li>
+          <li data-state="todo" data-step="build"><a href="#build"><span>4 Build</span><span class="state" id="state-build">To do</span></a></li>
+        </ol>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <h1>Syntakt OS 1.41 patch builder</h1>
+    <p class="lede">Private build. Your OS file stays in this browser tab: nothing is uploaded. Use only your own legally obtained OS 1.41 file.</p>
+
+    <details class="card" open>
+      <summary>How this works</summary>
+      <ol>
+        <li>Pick the features you want.</li>
+        <li>Choose your own OS 1.41 file.</li>
+        <li>Press Build and download the new file.</li>
+      </ol>
+      <p class="muted">This page only makes the file. It does not touch your Syntakt.</p>
+      <p class="muted">The cards below follow the same order. Card 2, "Extra mods", is optional: skip it unless someone sent you a mod file.</p>
+    </details>
+
+    <section id="features" aria-labelledby="features-title">
+      <h2 id="features-title"><span class="step-no" aria-hidden="true">1</span> Features <span class="badge" id="badge-features" data-tone="idle">Loading</span></h2>
+      <p class="muted" id="features-help">Some shared parts are added for you. You only need to tick the features you want.</p>
+      <details class="more">
+        <summary>What do these numbers mean?</summary>
+        <p class="muted">Patch memory is extra room inside the Syntakt (64 KB) where mods keep their code. The Syntakt makes sound in small pieces called audio slices, about 1,500 a second. A processor step is one small piece of work for the chip that makes that sound.</p>
+      </details>
+
+      <fieldset>
+        <legend class="sr-only">Features to apply</legend>
+        <div class="row bulk">
+          <div class="row">
+            <button type="button" class="text" id="select-all" disabled>Select all</button>
+            <button type="button" class="text" id="select-none" disabled>Select none</button>
+          </div>
+          <span class="muted count" id="count" aria-live="polite"></span>
+        </div>
+        <div class="checks">
+          <div class="feature-row"><label class="check"><input type="checkbox" class="feature" value="delay-control-core" checked disabled> Freeze / DelayCtrl</label><div class="note" data-note="delay-control-core"></div></div>
+          <div class="feature-row"><label class="check"><input type="checkbox" class="feature" value="delay-control-dj" checked disabled> DJ filter</label><div class="note" data-note="delay-control-dj"></div></div>
+          <div class="feature-row"><label class="check"><input type="checkbox" class="feature" value="delay-control-drive" checked disabled> Drive rectifier</label><div class="note" data-note="delay-control-drive"></div></div>
+          <div class="feature-row"><label class="check"><input type="checkbox" class="feature" value="delay-control-syn" checked disabled> FX SYN page</label><div class="note" data-note="delay-control-syn"></div></div>
+        </div>
+      </fieldset>
+
+      <div id="selection" class="panel" hidden>
+        <h3>Your selection</h3>
+        <p class="muted" id="mem-text"></p>
+        <div id="mem-bar" class="bar"><div id="mem-fill"></div></div>
+        <p class="muted" id="places"></p>
+        <p class="muted" id="load"></p>
+        <div id="conflicts"></div>
+        <p id="conflict-action" class="conflict"></p>
+      </div>
+      <h3>Will be applied, in this order</h3>
+      <ol id="plan" class="muted"></ol>
+      <p id="plan-error" role="alert"></p>
+
+      <div class="alt" id="v2o-block" aria-labelledby="v2o-title">
+        <h3 id="v2o-title">Alternative: the single file (tested baseline)</h3>
+        <label class="check"><input type="checkbox" id="v2o" aria-describedby="v2o-help" disabled> DelayCtrl v2o (single file, tested baseline)</label>
+        <p class="muted" id="v2o-help">This builds the one tested file, ignoring the features and mods above. Leave this off unless you want the exact build that was tested before.</p>
+        <p class="muted" id="patchinfo">For OS 1.41 only. Loading patch set...</p>
+      </div>
+    </section>
+
+    <section id="mods" aria-labelledby="mods-title">
+      <h2 id="mods-title"><span class="step-no" aria-hidden="true">2</span> Extra mods from other people (optional) <span class="badge" id="badge-mods" data-tone="idle">Optional</span></h2>
+      <p class="muted">Skip this unless someone sent you a mod file.</p>
+      <div class="checks" id="imports"></div>
+      <p class="muted" id="imports-empty">No mods added yet.</p>
+      <input type="file" id="import" class="sr-only" accept=".json,application/json" multiple disabled tabindex="-1" aria-label="Mod files (.json)">
+      <div class="drop" id="import-drop" data-disabled="true">
+        <button type="button" class="secondary" id="import-pick" disabled aria-describedby="import-help">Add mod files</button>
+        <span class="hint">or drop .json files here</span>
+      </div>
+      <p class="muted" id="import-help">Add mod files you were sent (.json). You can pick several at once. Each file is checked here first.</p>
+      <p class="muted">A patch file is one plain text file. It is only used when you tick it and press build. It cannot run anything here, and nothing is uploaded.</p>
+      <p class="muted">Only add files from people you trust. This page cannot yet check that your unit will still start with them.</p>
+      <p class="muted">Writing your own mod needs programming (C language). This is only for developers; you can ignore it. The guide is <code>docs/SDK.md</code> in the repository.</p>
+    </section>
+
+    <section id="os-file" aria-labelledby="os-title">
+      <h2 id="os-title"><span class="step-no" aria-hidden="true">3</span> Your OS 1.41 file <span class="badge" id="badge-os-file" data-tone="warn">Needs input</span></h2>
+      <input type="file" id="stock" class="sr-only" accept=".syx" tabindex="-1" aria-label="Your OS 1.41 file (.syx)" aria-describedby="stock-help">
+      <div class="drop" id="stock-drop" data-disabled="false">
+        <button type="button" class="secondary" id="stock-pick" aria-describedby="stock-help">Choose .syx file</button>
+        <span class="hint">or drop it here</span>
+      </div>
+      <p class="muted" id="stock-help">Use your own OS 1.41 file (.syx).</p>
+      <div class="chosen" id="stock-chosen" hidden>
+        <span><span class="name" id="stock-name"></span><span class="size" id="stock-size"></span></span>
+        <button type="button" class="secondary" id="stock-clear">Clear</button>
+      </div>
+      <p class="muted" id="stock-empty">No file chosen. It never leaves this browser tab.</p>
+    </section>
+
+    <section id="build" aria-labelledby="build-title">
+      <h2 id="build-title"><span class="step-no" aria-hidden="true">4</span> Build <span class="badge" id="badge-build" data-tone="warn">Needs input</span></h2>
+      <div class="row">
+        <button id="build" type="button" disabled aria-describedby="build-why"><span class="spinner" aria-hidden="true"></span><span>Build</span></button>
+        <span id="elapsed"></span>
+      </div>
+      <p id="build-why" class="muted"></p>
+      <p id="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="result" hidden aria-labelledby="result-title">
+      <h2 id="result-title">Result <span class="badge" data-tone="ok">Built</span></h2>
+      <p class="muted" id="applied"></p>
+      <p class="muted" id="match"></p>
+      <div class="row">
+        <a id="download" class="download" href="#" download>Download .syx</a>
+      </div>
+      <div class="kv" style="margin-top: 1rem;">
+        <span class="muted" id="sha-label">SHA-256 of the .syx</span>
+        <div class="sha-row">
+          <code id="sha" aria-labelledby="sha-label"></code>
+          <button type="button" class="secondary" id="copy-sha">Copy</button>
+        </div>
+        <span id="copy-status" class="muted" role="status" aria-live="polite"></span>
+      </div>
+      <aside class="flash-note" aria-labelledby="flash-title">
+        <h3 id="flash-title">Before you flash</h3>
+        <ul>
+          <li>This page only builds a file. It does not flash your unit and it does not contact the unit.</li>
+          <li>Check the SHA-256 above against the tested build. For the single-file v2o build, the page already compares it for you.</li>
+          <li>Keep RECOVERY.md from the repository at hand before you flash anything.</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Private build for OS 1.41 only. Runs in this tab, nothing is uploaded.</p>
+  </footer>
+
+  <script>window.addEventListener('error', e => { document.title = 'ERR ' + e.message })</script>
+  <script type="module">import('./app.mjs?v=9')</script>
+</body>
+</html>

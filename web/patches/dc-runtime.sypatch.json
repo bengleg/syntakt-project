@@ -1,0 +1,78 @@
+{
+ "format": "synthack-patchset",
+ "schema": 1,
+ "id": "delay-control-runtime",
+ "title": "DelayCtrl runtime",
+ "encoding": "lowercase-hex",
+ "requires": [
+  "modarea"
+ ],
+ "target": {
+  "device": "Syntakt",
+  "os": "1.41",
+  "stock_sha256": "8e2488f462c4a5656396a895f113bcd415e9900fa8709340dccf45d4cb9ed19e"
+ },
+ "area": {
+  "img": "0x40348000",
+  "ram": "0x46000000",
+  "size": "0x10000",
+  "compress": "shlz"
+ },
+ "units": [
+  {
+   "id": "delay-control-runtime",
+   "title": "DelayCtrl runtime",
+   "blocks": [
+    {
+     "id": "delay-control-runtime-4002E850",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4002e850",
+     "len": 8,
+     "kind": "code",
+     "stock_sha256": "b3cafaf05cca703fb3af1a18d97f2139059407105d37f9b55aeded4165085908",
+     "new": [
+      [
+       "hex",
+       "4eb9460040104e71"
+      ]
+     ],
+     "new_sha256": "a9c1fc5d7646981f7527d885294f9231c66480975e8ebeb89c657442f2549845",
+     "why": "consumeKeyEvent entry: jsr dc_entry_hook ; nop"
+    },
+    {
+     "id": "delay-control-runtime-4008FB04",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x4008fb04",
+     "len": 10,
+     "kind": "code",
+     "stock_sha256": "c72ceaf0af4ebed1927661fdc6d269df49096aaa515f2c750f97ea0f6075b45d",
+     "new": [
+      [
+       "hex",
+       "4eb9460040264e714e71"
+      ]
+     ],
+     "new_sha256": "ac3dd248f94a09a66fd23f8a5d0d0698ee74b90a9af07d1c0ebd37bdddc97c2b",
+     "why": "after FX bus sums: jsr dc_mix_hook ; nop ; nop"
+    },
+    {
+     "id": "delay-control-runtime-code",
+     "mode": "area",
+     "offset": 16400,
+     "len": 84,
+     "kind": "code",
+     "new": [
+      [
+       "hex",
+       "206f000823c846004008205f4e56ffac48d73cfc4ed04feffff048d703034eb94600404a4cd703034fef0010205f486efed848798000e0f04ed02079460040004a8867024e902079460040044a8867024ed04e75"
+      ]
+     ],
+     "new_sha256": "53c66da385c3b94abd6939073d6a83d03ab73e3b8ee50864c5ce9d01cadb0825",
+     "why": "linked code of this package (.text)"
+    }
+   ]
+  }
+ ]
+}

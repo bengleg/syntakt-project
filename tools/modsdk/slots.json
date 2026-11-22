@@ -1,0 +1,17 @@
+{
+  "note": "Where a mod's code and data may sit in the mod area. Offsets are from the start of the mod area (RAM 0x46000000). Ranges are [start, end). Keep this file in step with the packages in the repo.",
+  "area": {"img": "0x40348000", "ram": "0x46000000", "size": "0x10000", "compress": "shlz"},
+  "reserved": {
+    "delay-control": {
+      "start": "0x4000",
+      "end": "0x6e00",
+      "note": "From mods/delay-control/make_features.py: the registration words at 0x4000 and 0x4004 and the fixed header (dc.h, 12 bytes, DC_VIEW at 0x4008), then the PACKAGES ranges, the last of which ends at 0x6e00. 0x6e00 is already a multiple of 0x100, so it is not rounded further."
+    }
+  },
+  "dev": {
+    "start": "0x2000",
+    "end": "0x4000",
+    "note": "8 KB for development. Clear of DelayCtrl (from 0x4000). The older non-package mods used 0x0000 to 0x2000 and 0x7e00 and up; they are not part of the package system, so the dev slot avoids both."
+  },
+  "registered": {}
+}

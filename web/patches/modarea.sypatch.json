@@ -1,0 +1,55 @@
+{
+ "format": "synthack-patchset",
+ "schema": 1,
+ "id": "modarea",
+ "title": "Mod area loader",
+ "encoding": "lowercase-hex",
+ "requires": [],
+ "target": {
+  "device": "Syntakt",
+  "os": "1.41",
+  "stock_sha256": "8e2488f462c4a5656396a895f113bcd415e9900fa8709340dccf45d4cb9ed19e"
+ },
+ "units": [
+  {
+   "id": "modarea",
+   "title": "Mod area loader",
+   "blocks": [
+    {
+     "id": "modarea-40338D80",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x40338d80",
+     "len": 138,
+     "kind": "free-code",
+     "stock_sha256": "486a8212c0d6860840d883981ca52daaad3bf3b2ab5be56cdc47ed9b42daba22",
+     "new": [
+      [
+       "hex",
+       "4fefffec48d70e0541f94034800043f94600000020100c8053484c5a663a2428000441e8000c2449d5c2b3ca642a700010186b0812d853806cfa60ee02800000007f548072001218e1891218264997c112db53806cfa60d245f94601000020090280000000036704421960f2b3ca6404429960f84cd70e054fef00144feffff048d700f04ef9400004ba"
+      ]
+     ],
+     "new_sha256": "c12a8511a2abefc296e5e20003def974504cde37690cb7187f043aabbeb9cc40",
+     "why": "mod area loader: decompress the area stream to RAM, zero the rest, jump back"
+    },
+    {
+     "id": "modarea-400004B2",
+     "mode": "replace",
+     "section": 3,
+     "addr": "0x400004b2",
+     "len": 8,
+     "kind": "code",
+     "stock_sha256": "02baba67a7ec7d7bdf683fa37f268620e3a694853b398205df521c64128da818",
+     "new": [
+      [
+       "hex",
+       "4ef940338d804e71"
+      ]
+     ],
+     "new_sha256": "e2283d8e4de45f7b8bb8c0d1cbdb2fc9e6ed140de1c65e64b4f42017d7d67b81",
+     "why": "start of the BSS clear: jmp modarea_reloc ; nop"
+    }
+   ]
+  }
+ ]
+}

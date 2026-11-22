@@ -1,0 +1,34 @@
+{
+ "packages": [
+  {
+   "id": "modarea",
+   "file": "modarea.sypatch.json",
+   "title": "Mod area loader"
+  },
+  {
+   "id": "delay-control-runtime",
+   "file": "dc-runtime.sypatch.json",
+   "title": "DelayCtrl runtime"
+  },
+  {
+   "id": "delay-control-core",
+   "file": "dc-core.sypatch.json",
+   "title": "Freeze / DelayCtrl"
+  },
+  {
+   "id": "delay-control-dj",
+   "file": "dc-dj.sypatch.json",
+   "title": "DJ filter"
+  },
+  {
+   "id": "delay-control-drive",
+   "file": "dc-drive.sypatch.json",
+   "title": "Drive rectifier"
+  },
+  {
+   "id": "delay-control-syn",
+   "file": "dc-syn.sypatch.json",
+   "title": "FX SYN page"
+  }
+ ]
+}

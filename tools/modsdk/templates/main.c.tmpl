@@ -1,0 +1,22 @@
+/* {{title}}: a mod that does nothing yet.
+ *
+ * Build it:  python tools/modsdk/modsdk.py build mods/{{id}}
+ *
+ * entry (in mod.json) names a global function here. Do not make it static.
+ *
+ * To hook a stock function, add an entry to "hooks" in mod.json. The hook replaces a few stock
+ * instructions with a jump to a function you name in "call". The SDK does NOT replay the replaced
+ * instructions for you. The function must do their work itself, then return. Read the stock
+ * instructions with the fingerprint command and your own OS file, never paste their bytes here.
+ *
+ * Variables: give each global variable DATA and a start value that is not zero (see syntakt.h).
+ */
+#include "syntakt.h"
+
+DATA u32 my_calls = 1;
+
+u32 my_entry(void)
+{
+    my_calls++;
+    return my_calls;
+}

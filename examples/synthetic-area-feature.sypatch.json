@@ -1,0 +1,37 @@
+{
+  "format": "synthack-patchset",
+  "schema": 1,
+  "id": "synthetic-area-feature",
+  "title": "Synthetic area feature (structure only)",
+  "requires": ["synthetic-data-change"],
+  "encoding": "lowercase-hex",
+  "target": {
+    "device": "Syntakt",
+    "os": "1.41",
+    "stock_sha256": "8e2488f462c4a5656396a895f113bcd415e9900fa8709340dccf45d4cb9ed19e"
+  },
+  "area": {
+    "img": "0x40348000",
+    "ram": "0x46000000",
+    "size": "0x10000",
+    "compress": "shlz"
+  },
+  "units": [
+    {
+      "id": "synthetic-feature",
+      "title": "Synthetic feature code",
+      "blocks": [
+        {
+          "id": "synthetic-feature-code",
+          "mode": "area",
+          "offset": "0x8000",
+          "len": 6,
+          "kind": "code",
+          "new": [["hex", "4e714e714e75"]],
+          "new_sha256": "e4ef81c8d0139a39f3c98ff04517bda09dcb1cc16057ce58f631ee133de18394",
+          "why": "Synthetic example: nop, nop, rts in the mod area."
+        }
+      ]
+    }
+  ]
+}
