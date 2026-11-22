@@ -3,7 +3,7 @@
 # Agent notes: code-level rules (this is docs/AGENT-NOTES.md; the root briefing is ..\AGENTS.md)
 
 Guidance for AI agents working in this repository. Read it before you change
-anything. Humans: [CONTRIBUTING.md](CONTRIBUTING.md) and [LEGAL.md](LEGAL.md).
+anything. Humans: [CONTRIBUTING.md](../CONTRIBUTING.md) and [LEGAL.md](../LEGAL.md).
 
 ## Privacy and licence rules (hard limits)
 
@@ -57,8 +57,8 @@ when the user asks, keep their output in memory, and never save it.
 ## Patch packages
 
 A package is one `.sypatch.json` file, specified in
-[docs/PATCH-FORMAT.md](docs/PATCH-FORMAT.md). Packages are normally produced by
-the SDK (see [docs/SDK.md](docs/SDK.md)). Hand-written packages follow the steps
+[docs/PATCH-FORMAT.md](PATCH-FORMAT.md). Packages are normally produced by
+the SDK (see [docs/SDK.md](SDK.md)). Hand-written packages follow the steps
 below. To add or change a package:
 
 1. Use `format: "synthack-patchset"`, `schema: 1`, `encoding: "lowercase-hex"`,
@@ -78,7 +78,7 @@ below. To add or change a package:
    bytes; say so in your report if you rely on it.
 7. Keep the package free of personal data and original bytes.
 
-Synthetic examples live in [examples/](examples/README.md). Do not put real
+Synthetic examples live in [examples/](../examples/README.md). Do not put real
 packages there.
 
 ## Browser and user-facing text

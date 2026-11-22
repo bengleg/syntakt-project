@@ -23,8 +23,9 @@ Last updated: 2026-11-23. Update the row that changed whenever a build, a featur
 |---|---|---|
 | `delay_control_v2o.syx` | `3df95923db35b0787119b04253e877f62b7c10ee1b7ab3f87340673aa843e3ac` | Tested baseline. DCTL 9-step list not yet confirmed on a unit. |
 | `delay_control_v2l.syx` | `4b2a291ee872f827ba4b7644228c4bb9fb89720ed2ecbeb19a63a82c7fdd82e9` | Known-good fallback |
+| Four-feature DelayCtrl build (freeze, DJ, drive, SYN; baseline box unticked) | `25773b67048b2232e2a73631f4448be4163ef42d82c8611167c08dbc3adc972f` | Built in the browser page on 2026-11-23 (headless Chrome). Not confirmed on a unit or in an emulator. Not yet listed in `FIRMWARE_INDEX.csv`. |
 
-Both hashes match `FIRMWARE_INDEX.csv`. The `.syx` files are git-ignored and are not in the repo.
+Both hashes in the first two rows match `FIRMWARE_INDEX.csv`. The `.syx` files are git-ignored and are not in the repo.
 
 ## Public and distribution
 
@@ -33,8 +34,8 @@ Both hashes match `FIRMWARE_INDEX.csv`. The `.syx` files are git-ignored and are
 | GitHub repo | Public: `bengleg/syntakt-project`, branch `main`. Checked with `gh` on 2026-11-23. |
 | Built firmware file | Not distributed. Owner decision (see commit `8ad5c56` and README). |
 | GitHub Release | None. Users build from their own stock file. |
-| Browser builder `web/` | In the repo. Not hosted: no GitHub Pages, no deploy workflow (there is no `.github/` folder). |
-| Browser build core | Reproduces the v2o baseline byte for byte, per STATE.md (2026-11-23). Not re-run for this sheet. |
+| Browser builder `web/` | In the repo. Not hosted: no GitHub Pages, no deploy workflow (there is no `.github/` folder). Verified working end to end on 2026-11-23 in headless Chrome only (desktop browsers not tested). Known gap: a wrong `.syx` still shows Ready until Build is pressed, then it is refused. |
+| Browser build core | Verified end to end on 2026-11-23 (headless Chrome). The baseline box reproduced the v2o build byte for byte (`3df959…`); the four-feature build gave `25773b…`. Evidence in QUESTS.md (Q3/Q6 evidence). |
 | To open the page | Needs an engine checkout that is not in the repo, plus a Node build step (`node web/build.mjs`). |
 
 ## Unresolved: engine location
