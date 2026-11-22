@@ -8,6 +8,27 @@ a build starts from the stock OS file you downloaded from elektron.se, so no fir
 
 **Public.** Anyone can clone it and build their own OS file. Nothing Elektron ships is stored here.
 
+## Install it on your Syntakt
+
+You build the firmware file yourself on a computer. No ready-made file is offered here.
+
+What you need:
+- Your own OS 1.41 file, `Syntakt_OS1.41.syx`, from elektron.se. Only OS 1.41 works.
+- A MIDI DIN interface, so you can recover the unit if something goes wrong.
+- Your projects backed up. Read [RECOVERY.md](RECOVERY.md) before you flash anything.
+
+On the computer: Windows with WSL (Ubuntu), or Linux. You need Python 3.9 or newer, plus Git,
+`make` and `gcc`, which the one-time setup uses to build a helper tool.
+
+Steps, run in WSL or Linux from the project folder:
+1. Put `Syntakt_OS1.41.syx` in the `firmware/` folder. Git ignores it, so it is never shared.
+2. Once: `bash tools/unpack/setup_eft.sh`
+3. Build the file:
+   `python3 tools/build/build.py --stock firmware/Syntakt_OS1.41.syx mods/modarea mods/delay-control -o out/out.syx`
+4. The result is `out/out.syx`. Read [RECOVERY.md](RECOVERY.md) before you send it to the unit.
+
+The build stops with an error if the stock file is not exactly OS 1.41.
+
 ## What is in here
 
 | Component | Path | What it is |

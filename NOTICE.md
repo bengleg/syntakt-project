@@ -9,7 +9,9 @@ The tree was imported on 2026-11-22 from the working branch `private/webbuilder-
 `..\Default Project\Synthack-OS` (commit `a63ad93`, plus uncommitted SDK work that existed nowhere
 else). The pre-import history is still in that repository; the branches are `private/webbuilder-r6`
 and `private/patch-format-r1`, and `GIT_LOG.txt` records the tips at import time. Git history here
-starts at the import commit.
+starts at the import commit. When the repository was published on 2026-11-23, its three commits were
+re-authored as `bengleg`; their messages and contents are unchanged, and the LICENSE line for this
+repository's own code names `bengleg` alongside the upstream line.
 
 ## Upstream: SyntHack-OS
 
