@@ -16,8 +16,10 @@ anything. Humans: [CONTRIBUTING.md](../CONTRIBUTING.md) and [LEGAL.md](../LEGAL.
 - **Originals are read-only.** Never modify, move, rename or delete the user's OS
   file or any file in `firmware/`. Work on copies outside the repository.
 - **Nothing leaves the machine without explicit approval.** Do not publish, upload,
-  send, post, flash or push anything, and do not contact devices, without the
-  user's explicit approval for that specific action.
+  send, post or flash anything, and do not contact devices, without the user's
+  explicit approval for that specific action. A docs-or-prose-only push needs no
+  per-push approval, and re-deploying the already-published page is pre-approved.
+  Say what you pushed.
 - **No personal data** in any file: no absolute paths, user names, machine names,
   serial numbers or account data. Use relative paths in docs and examples.
 - **Never claim a check passed** unless you ran it in this session, and report the
@@ -47,8 +49,10 @@ Variables, as read by the tests:
 - `SYNTAKT_V2O`: a locally built reference file, for comparison only.
 - `ESBUILD_JS`: an esbuild module (a name, or a `file://` URL) used by `web/build.mjs`.
 
-Do not set these to paths inside the repository. Do not write their values into
-any file or output.
+The engine clone may live inside the repository for local use (`synfact-dev/` is
+git-ignored, and the generated shim points at it); a CI build clones the engine to
+a temporary folder outside the checkout. Do not write their values into any
+committed file or output beyond that git-ignored shim.
 
 Rule for agents: the tests that build a full image (the "rebuilt" tests and the
 full DelayCtrl builds) produce bytes derived from the stock file. Run them only
@@ -86,7 +90,9 @@ packages there.
 - **The browser never executes patch content.** A package is read as text and
   parsed as data. Do not add `eval`, `new Function`, dynamic `import()` or
   `innerHTML` for anything that comes from a package, and do not load code from a
-  package URL. Package fields are data, always.
+  package URL. Package fields are data, always. (`import()` of the page's own
+  modules, such as `web/app.mjs` and `web/dist/*.mjs`, is fine; the prohibition is
+  about package content and package URLs.)
 - **User-facing text never says "block".** Say "change" or "part" in the page, in
   error messages, in the README and in release notes. "Block" is developer
   vocabulary for the JSON `blocks[]` and stays in developer docs and code only.

@@ -20,7 +20,7 @@ HISTORY.md, SDK_AND_FX3_NOTES.md and `archive/` only on demand.
 
 - No firmware bytes (`.syx`, `.smz4`, `.bin`, `.elemod`, `.elf`, `.img`, `.raw`) tracked by git, in repo files, prompts, logs or fixtures. Use hashes only. `.gitignore` and `tools/hooks/check_no_firmware.py` enforce it; check `git status` before every commit anyway. `synfact-dev/` may hold local copies — it is ignored.
 - Originals in `..\Default Project` are read-only.
-- Nothing is flashed, published, uploaded, pushed or sent without explicit approval.
+- Approval gates. Flashing the unit, publishing and uploading need explicit approval. A docs-or-prose-only push does not, and re-deploying the already-published page is pre-approved — say what you pushed.
 - No personal data or absolute paths in committed docs.
 - Never claim a check passed that was not run.
 - Stay on OS 1.41 only.
@@ -53,10 +53,10 @@ HISTORY.md, SDK_AND_FX3_NOTES.md and `archive/` only on demand.
 
 ## How work is done here
 
-- Keep each work round to roughly $1.5 of model spend.
+- Keep each work round to roughly $2 of model spend.
 - Verify every build: rebuild, confirm the `.syx` SHA changed, run the tests, then commit.
 - Run emulator tests before asking benleg to flash.
-- Explicit gates stay: flashing, publishing and uploading need approval.
+- Explicit gates stay: flashing the unit, publishing and uploading need approval. Docs-only pushes and re-deploys of the published page do not.
 - Keep builder changes and package changes in separate commits.
 - The browser now measures the start-up (boot-room) margin of the file it builds and refuses below 4 KB, using `tools/sypatch/bootmargin.mjs`. It matches `tools/build/bootcheck.py`: both give 99 938 B on stock 1.41.
 
