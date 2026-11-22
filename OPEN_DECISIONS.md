@@ -16,7 +16,7 @@
 4. **Release path.** ANSWERED 2026-11-22: public repository. Nobody asks Elektron for permission.
    - B: source plus disclaimer, posted publicly.
    - C: no public post.
-   - Note: Isaac does not want to ask Elektron for permission.
+   - Note: benleg does not want to ask Elektron for permission.
 
 5. **Packaging.**
    - A: Reddit r/Elektron post plus GitHub source (Recommended).
@@ -30,7 +30,7 @@
    - B: keep ours and add his features one at a time.
    - C: keep both formats, no merge.
 
-8. **Edits: check as code or data.** Asked 2026-11-21, Isaac said do nothing yet. Edits are written as data, with no whole-instruction check.
+8. **Edits: check as code or data.** Asked 2026-11-21, benleg said do nothing yet. Edits are written as data, with no whole-instruction check.
 
 9. **Slot for fx3-sized mods.** About 0xA000 to 0xF000 plus reserved zeroed RAM. Needs addresses confirmed and a boot-margin test first.
 

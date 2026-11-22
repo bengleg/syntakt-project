@@ -99,7 +99,7 @@ Block map of the legacy DelayCtrl patch (`Default Project\Synthack-OS\mods\delay
 - Drive rectifier: in v2o, inside the code blob, not a separate hook. `rectify()` in `mods/delay-control/dc.c` (around line 231), called at line 353; reads the FX Drive value at 0x800028F0. Reach it by the mix hook (block 13) or by its own feature flag.
 - Code blob (3,508 B, area, offset 0x4000): one compiled blob shared by all features. Shared hooks: `dc_mix_hook`, `dc_mute_hook`.
 
-Open decisions (not yet answered by Isaac):
+Open decisions (not yet answered by benleg):
 1. Split method: recompile `dc.c` per feature with flags (each feature its own area offset), or keep one blob. Recompiling gives a new build; the all-features build is no longer byte-identical to v2o and needs a unit test.
 2. Rectifier: confirmed in v2o (see block map above). Decide whether it is its own feature flag in the split.
 3. User uploads: trusted files only until the boot-margin check (`tools/build/bootcheck.py`) exists in the browser path.

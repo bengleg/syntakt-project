@@ -54,7 +54,7 @@ HISTORY.md, SDK_AND_FX3_NOTES.md and `archive/` only on demand.
 
 - Keep each work round to roughly $1.5 of model spend.
 - Verify every build: rebuild, confirm the `.syx` SHA changed, run the tests, then commit.
-- Run emulator tests before asking Isaac to flash.
+- Run emulator tests before asking benleg to flash.
 - Explicit gates stay: flashing, publishing and uploading need approval.
 - Keep builder changes and package changes in separate commits.
 - User-supplied patch files are trusted-files-only until the boot-margin check exists in the browser path.

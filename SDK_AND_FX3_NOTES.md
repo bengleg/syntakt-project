@@ -90,7 +90,7 @@ Only `hello-sdk` (16 bytes of code) has ever been built with the SDK. DelayCtrl 
 ## 7. Open decisions (also in OPEN_DECISIONS.md)
 
 7. **Shared platform direction.** Leaning (not decided): our plain list as the one door, a converter for his `patch.json`, and review plus badges (checked, emulator-tested, hardware-confirmed, trusted-only).
-8. **Edits: data or code check.** Asked, Isaac said do nothing yet. Edits are data for now.
+8. **Edits: data or code check.** Asked, benleg said do nothing yet. Edits are data for now.
 9. **Slot for fx3-sized mods.** About 0xA000 to 0xF000 plus reserved zeroed RAM. Needs addresses confirmed and a boot-margin test first.
 10. **One mod area or two.** Ours and his each load their own. Needs the two loaders compared.
 
