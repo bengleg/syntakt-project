@@ -84,3 +84,9 @@ Full record: `SDK_AND_FX3_NOTES.md`. Read that first for anything about third-pa
 
 ## Website polish (2026-11-18)
 Builder page redesigned (steps bar, select all/none, drop zones, remove mod, copy SHA, flash note). Cache stamp ?v=8. Was uncommitted in builder-web when written; since committed in the repository import (929f05f). Evidence and gaps in QUESTS.md.
+
+## Live page and rule changes (2026-11-23)
+
+- The browser page is published on GitHub Pages, deployed from `main` by `.github/workflows/pages.yml`. The live check in headless Chrome reproduced the v2o SHA (`3df959…`) and the 2,475,424-byte download.
+- Three earlier deploy runs failed before one succeeded. Only the successful run (45069258773) is confirmed. The cause of the earlier failures was not found.
+- Rule changes the same day: a docs-only push needs no per-push approval; re-deploying the published page is pre-approved; the round budget is $2; the engine clone may live inside the repo (`synfact-dev/`, git-ignored). CI still clones to a temp folder.

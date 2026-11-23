@@ -5,7 +5,7 @@ Last updated: 2026-11-23. Update the row that changed whenever a build, a featur
 ## What this is
 
 - Unofficial custom firmware for the Elektron Syntakt on OS 1.41, built on SyntHack-OS by Angelo-politek.
-- The repo holds source and patch data only. You build the firmware file yourself from your own stock OS 1.41 file.
+- The repo holds source and patch data only. The browser page is the easy route to a file; building it yourself from your own stock OS 1.41 file is the other.
 
 ## Features
 
@@ -31,22 +31,23 @@ Both hashes in the first two rows match `FIRMWARE_INDEX.csv`. The `.syx` files a
 
 | Item | Status |
 |---|---|
-| GitHub repo | Public: `bengleg/syntakt-project`, branch `main`. Checked with `gh` on 2026-11-23. |
-| Built firmware file | Not distributed. Owner decision (see commit `8ad5c56` and README). |
-| GitHub Release | None. Users build from their own stock file. |
-| Browser builder `web/` | Hosted on GitHub Pages at `https://bengleg.github.io/syntakt-project/`, deployed from `main` by `.github/workflows/pages.yml` (added 2026-11-23). Live check 2026-11-23 (headless Chrome, live URL): the v2o box gives `3df959…` and a 2,475,424-byte download. Deploy run 45069258773 succeeded. Verified working end to end on 2026-11-23 in headless Chrome, from a local build (desktop browsers not tested). Known gap: a wrong `.syx` still shows Ready until Build is pressed, then it is refused. |
-| Browser build core | Verified end to end on 2026-11-23 (headless Chrome). The baseline box reproduced the v2o build byte for byte (`3df959…`); the four-feature build gave `25773b…`. Evidence in QUESTS.md (Q3/Q6 evidence). |
-| To open the page | Public page: nothing to install. Local build: needs a synfact-dev checkout at `fcbc288` and `node web/build.mjs` (see `docs/BUILDING.md`). |
+| Repo and live page | Repo `bengleg/syntakt-project` is public, branch `main` (checked with `gh` on 2026-11-23). Page live at `https://bengleg.github.io/syntakt-project/`, deployed from `main` by `.github/workflows/pages.yml` (deploy run 45069258773, succeeded). Live check, headless Chrome, two runs: the v2o box gives `3df959…` and a 2,475,424-byte download, in about 42 s. |
+| Page re-deploys itself | The Pages workflow runs on pushes to `main` that touch `web/**` or `tools/sypatch/**`, so a page change publishes with no separate step. It can also be run by hand. |
+| Built firmware file | Not distributed, on purpose. No GitHub Release; users build from their own stock file. Owner decision (commit `8ad5c56` and README). |
+| Page verification and use | Only headless Chrome, only the owner's stock file; desktop browsers not tested. Known gaps: `favicon.ico` returns 404; a wrong `.syx` still shows Ready until Build is pressed, then it is refused. Nothing to install to use the public page. A local build needs a synfact-dev checkout at `fcbc288` and `node web/build.mjs` (see `docs/BUILDING.md`). |
 
 ## Resolved: engine location (2026-11-23)
 
-- The engine is `synfact-dev` (`https://github.com/GSM1980/synfact-dev`), pinned at commit `fcbc288`.
-- `docs/BUILDING.md` and the Pages workflow both use that pin.
-- Licence corrected to GPL-3.0-or-later (`js/LICENSE`). `NOTICE.md` and `docs/BUILDING.md` had said GPL-2.0-or-later.
+- The engine is `synfact-dev` (`https://github.com/GSM1980/synfact-dev`), pinned at commit `fcbc288`. `docs/BUILDING.md` and the Pages workflow use the same pin.
+- Licence is GPL-3.0-or-later (`js/LICENSE`). `NOTICE.md` and `docs/BUILDING.md` had said GPL-2.0-or-later; corrected.
+
+## Open for the owner
+
+- Confirm the DCTL 9-step rate list on a real unit.
+- Packaging (`OPEN_DECISIONS.md` item 5): a live page is a new distribution channel, and the owner has not yet said which option it belongs to. Not decided.
 
 ## Where to read next
 
 - Open decisions: `OPEN_DECISIONS.md`.
 - Unverified items and known gaps: `STATE.md`, section "Not done".
-- Working history and round notes: `STATE.md`.
 - Agent rules and read order: `AGENTS.md`.
