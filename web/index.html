@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Builds a patched Syntakt OS 1.41 file from your own OS file, in your browser. Nothing is uploaded.">
+  <meta name="description" content="Pick features and mods, choose your Syntakt OS 1.41 file, and build a patched .syx in the browser.">
   <title>Syntakt OS 1.41 patch builder</title>
   <style>
     /* Geist dark palette (approximate values of the Geist scales; no external font or CDN requests) */
@@ -281,10 +281,10 @@
       <span class="brand">Syntakt patch builder</span>
       <nav aria-label="Build steps">
         <ol class="steps" id="steps">
-          <li data-state="todo" data-step="features"><a href="#features"><span>1 Features</span><span class="state" id="state-features">To do</span></a></li>
-          <li data-state="todo" data-step="mods"><a href="#mods"><span>2 Mods</span><span class="state" id="state-mods">To do</span></a></li>
-          <li data-state="todo" data-step="os-file"><a href="#os-file"><span>3 OS file</span><span class="state" id="state-os-file">To do</span></a></li>
-          <li data-state="todo" data-step="build"><a href="#build"><span>4 Build</span><span class="state" id="state-build">To do</span></a></li>
+          <li data-state="todo" data-step="features"><a href="#features"><span>1 Pick features</span><span class="state" id="state-features">To do</span></a></li>
+          <li data-state="todo" data-step="mods"><a href="#mods"><span>2 Add mods</span><span class="state" id="state-mods">To do</span></a></li>
+          <li data-state="todo" data-step="os-file"><a href="#os-file"><span>3 Choose your OS file</span><span class="state" id="state-os-file">To do</span></a></li>
+          <li data-state="todo" data-step="build"><a href="#build-step"><span>4 Build and download</span><span class="state" id="state-build">To do</span></a></li>
         </ol>
       </nav>
     </div>
@@ -292,17 +292,17 @@
 
   <main id="content">
     <h1>Syntakt OS 1.41 patch builder</h1>
-    <p class="lede">Your OS file stays in this browser tab: nothing is uploaded. Use only your own legally obtained OS 1.41 file.</p>
+    <p class="lede">Build a patched Syntakt OS 1.41 file in your browser.</p>
 
     <details class="card" open>
       <summary>How this works</summary>
       <ol>
         <li>Pick the features you want.</li>
-        <li>Choose your own OS 1.41 file.</li>
+        <li>Choose your OS 1.41 file.</li>
         <li>Press Build and download the new file.</li>
       </ol>
       <p class="muted">This page only makes the file. It does not touch your Syntakt.</p>
-      <p class="muted">The cards below follow the same order. Card 2, "Extra mods", is optional: skip it unless someone sent you a mod file.</p>
+      <p class="muted">The cards below follow the same order. Card 2, "Extra mods from other people", is optional: skip it unless someone sent you a mod file.</p>
     </details>
 
     <section id="features" aria-labelledby="features-title">
@@ -362,7 +362,7 @@
         <span class="hint">or drop .json files here</span>
       </div>
       <p class="muted" id="import-help">Add mod files you were sent (.json). You can pick several at once. Each file is checked here first.</p>
-      <p class="muted">A patch file is one plain text file. It is only used when you tick it and press build. It cannot run anything here, and nothing is uploaded.</p>
+      <p class="muted">A patch file is one plain text file. It is only used when you tick it and press build. It cannot run anything here.</p>
       <p class="muted">Only add files from people you trust. This page cannot yet check that your unit will still start with them.</p>
       <p class="muted">Writing your own mod needs programming (C language). This is only for developers; you can ignore it. The guide is <a href="https://github.com/bengleg/syntakt-project/blob/main/docs/SDK.md"><code>docs/SDK.md</code></a> in the repository.</p>
     </section>
@@ -374,15 +374,15 @@
         <button type="button" class="secondary" id="stock-pick" aria-describedby="stock-help">Choose .syx file</button>
         <span class="hint">or drop it here</span>
       </div>
-      <p class="muted" id="stock-help">Use your own OS 1.41 file (.syx).</p>
+      <p class="muted" id="stock-help">The .syx file from Elektron (OS 1.41).</p>
       <div class="chosen" id="stock-chosen" hidden>
         <span><span class="name" id="stock-name"></span><span class="size" id="stock-size"></span></span>
         <button type="button" class="secondary" id="stock-clear">Clear</button>
       </div>
-      <p class="muted" id="stock-empty">No file chosen. It never leaves this browser tab.</p>
+      <p class="muted" id="stock-empty">No file chosen.</p>
     </section>
 
-    <section id="build" aria-labelledby="build-title">
+    <section id="build-step" aria-labelledby="build-title">
       <h2 id="build-title"><span class="step-no" aria-hidden="true">4</span> Build <span class="badge" id="badge-build" data-tone="warn">Needs input</span></h2>
       <div class="row">
         <button id="build" type="button" disabled aria-describedby="build-why"><span class="spinner" aria-hidden="true"></span><span>Build</span></button>
@@ -417,14 +417,19 @@
         </ul>
       </aside>
     </section>
+
+    <details class="card" id="legal">
+      <summary>Legal &amp; privacy</summary>
+      <p class="muted">Unofficial and not affiliated with Elektron: no Elektron firmware is distributed. You supply your own legally obtained stock OS 1.41 file. Patching runs locally in this browser, and your file is not uploaded.</p>
+    </details>
   </main>
 
   <footer class="foot">
-    <p>For OS 1.41 only. Runs in this tab, nothing is uploaded.</p>
+    <p>For OS 1.41 only.</p>
     <p>Includes the engine from <a href="https://github.com/GSM1980/synfact-dev/tree/fcbc288">synfact-dev</a> (commit fcbc288), licensed GPL-3.0-or-later.</p>
   </footer>
 
   <script>window.addEventListener('error', e => { document.title = 'ERR ' + e.message })</script>
-  <script type="module">import('./app.mjs?v=11')</script>
+  <script type="module">import('./app.mjs?v=12')</script>
 </body>
 </html>
