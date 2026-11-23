@@ -8,8 +8,8 @@ anything. Humans: [CONTRIBUTING.md](../CONTRIBUTING.md) and [LEGAL.md](../LEGAL.
 ## Privacy and licence rules (hard limits)
 
 - **Never commit firmware or firmware-like files**: no `.syx`, `.smz4`, `.bin`,
-  `.elemod`, `.elf`, `.img`, `.raw`. `.gitignore` and `tools/hooks` cover some of
-  these; the rule covers all of them. Check `git status` before every commit.
+  `.elemod`, `.elf`, `.img`, `.raw`. `.gitignore` and `tools/hooks` list all of
+  them; the rule covers them regardless. Check `git status` before every commit.
 - **No stock bytes** (original OS 1.41 bytes) in prompts, logs, test fixtures,
   examples, generated output, commit messages or issue text. Hashes of original
   bytes are allowed. Dumps, disassembly and byte listings of the stock OS are not.

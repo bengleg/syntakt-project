@@ -114,4 +114,4 @@ Rules still apply: no `.syx`/`.elemod` files in the repo, no firmware bytes in r
 - Verified: fresh v2o build equals the supplied v2o (`3df959…`). All-four build (`25773b…`) does not match v2o, as expected from the relinked code. Replace sites: same 31 addresses; 24 change bytes (jump targets and pointers). Behaviour in emulator/hardware NOT verified.
 - Merge/validation: `tools/sypatch/merge.mjs`; page loads the manifest, imports files as data, validates in the worker.
 - Patch standard: `docs/PATCH-FORMAT.md`, `docs/AUTHORING.md`, `AGENTS.md`, `examples/` (synthetic).
-- Open: `tools/hooks/check_no_firmware.py` does not block `.smz4`/`.elemod`; `README.md` line 56 says "blocks firmware files" (pre-existing, user-facing); `test_splash_mod` needs `pyfiglet` (environment); `test_delay_control.py` skips here (no firmware file in the worktree).
+- Open: `tools/hooks/check_no_firmware.py` did not block `.smz4`/`.elemod` at the time of this note (both are blocked now); `README.md` line 56 says "blocks firmware files" (pre-existing, user-facing); `test_splash_mod` needs `pyfiglet` (environment); `test_delay_control.py` skips here (no firmware file in the worktree).

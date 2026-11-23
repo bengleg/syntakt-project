@@ -34,7 +34,7 @@ Both hashes in the first two rows match `FIRMWARE_INDEX.csv`. The `.syx` files a
 | Repo and live page | Repo `bengleg/syntakt-project` is public, branch `main` (checked with `gh` on 2026-11-23). Page live at `https://bengleg.github.io/syntakt-project/`, deployed from `main` by `.github/workflows/pages.yml` (deploy run 45069258773, succeeded). Live check, headless Chrome, two runs: the v2o box gives `3df959…` and a 2,475,424-byte download, in about 42 s. |
 | Page re-deploys itself | The Pages workflow runs on pushes to `main` that touch `web/**` or `tools/sypatch/**`, so a page change publishes with no separate step. It can also be run by hand. |
 | Built firmware file | Not distributed, on purpose. No GitHub Release; users build from their own stock file. Owner decision (commit `8ad5c56` and README). |
-| Page verification and use | Only headless Chrome, only the owner's stock file; desktop browsers not tested. Known gaps: `favicon.ico` returns 404; a wrong `.syx` still shows Ready until Build is pressed, then it is refused. Nothing to install to use the public page. A local build needs a synfact-dev checkout at `fcbc288` and `node web/build.mjs` (see `docs/BUILDING.md`). |
+| Page verification and use | Only headless Chrome, only the owner's stock file; desktop browsers not tested. Known gaps: a wrong `.syx` still shows Ready until Build is pressed, then it is refused. (The `favicon.ico` 404 was fixed on 2026-11-23.) Nothing to install to use the public page. A local build needs a synfact-dev checkout at `fcbc288` and `node web/build.mjs` (see `docs/BUILDING.md`). |
 
 ## Resolved: engine location (2026-11-23)
 
